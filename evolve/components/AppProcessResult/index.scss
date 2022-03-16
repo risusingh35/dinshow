@@ -1,0 +1,22 @@
+@import "../../assets/scss/v2/vars";
+@import "../../assets/scss/v2/utils/anim";
+@import "../../assets/scss/v2/mixins";
+
+@mixin use-color-style {
+    @each $color, $value in $action-color-set {
+        &.#{$color} {
+            color: $value;
+
+            .icon-container {
+                .icon {
+                    color: $value;
+                }
+            }
+
+            .title,
+            .message {
+                color: $value;
+            }
+        }
+    }
+}

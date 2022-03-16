@@ -1,0 +1,13 @@
+@import "../../../assets/scss/v2/vars";
+@import "../../../assets/scss/v2/mixins";
+@import "../../../assets/scss/v2/utils/scroll";
+
+$avg-content-width: 600px;
+$avg-left-padding: 20px;
+$avg-right-padding: 20px;
+$total-content-width: $avg-content-width + $avg-left-padding + $avg-right-padding;
+
+@mixin regular-x-padding {
+    padding-left: $avg-left-padding;
+    padding-right: $avg-right-padding;
+}

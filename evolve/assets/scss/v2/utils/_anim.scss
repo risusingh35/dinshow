@@ -1,0 +1,93 @@
+@-webkit-keyframes anim-fade-in {
+    from {
+        opacity: 0;
+    }
+  
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes anim-fade-in {
+    from {
+        opacity: 0;
+    }
+  
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes anim-fade-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes anim-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes anim-fade-out-up {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+@mixin use-anim ($name, $duration: 500ms, $iteration: initial) {
+    -webkit-animation-name: $name;
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-iteration-count: $iteration;
+}
+
+@mixin animate-fadein ($duration: 500ms) {
+    @include use-anim(anim-fade-in, $duration);
+}
+.animate-fadein {
+    @include animate-fadein(280ms);
+}
+
+@mixin animate-fadedown ($duration: 500ms) {
+    @include use-anim(anim-fade-down, $duration);
+}
+.animate-fadedown {
+    @include animate-fadedown(280ms);
+}
+
+@mixin animate-fadeup ($duration: 500ms) {
+    @include use-anim(anim-fade-up, $duration);
+}
+.animate-fadedown {
+    @include animate-fadeup(280ms);
+}
+
+@mixin animate-fade-out-up ($duration: 500ms) {
+    @include use-anim(anim-fade-out-up, $duration);
+}
+.animate-fade-out-up {
+    @include animate-fade-out-up(280ms);
+}
+.fade-out-up-leave-active {
+    @extend .animate-fade-out-up;
+}

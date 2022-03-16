@@ -1,0 +1,214 @@
+#sc-page-top-bar {
+	&.sc-top-bar {
+		background: $white;
+		box-sizing: border-box;
+		position: relative;
+		@include font-size(14px);
+		display: flex;
+		min-height: $top-bar-content-height;
+		z-index: $z-index-topbar;
+		.sc-js-top-bar-fold {
+			display: none;
+		}
+		&-expanded {
+			.sc-top-bar-content {
+				&-expanded {
+					transition: transform 280ms $easing, opacity 140ms $easing;
+					opacity: 1;
+					transform:translate3d(0,0,0);
+				}
+			}
+			.sc-js-el-hide {
+				display: none;
+			}
+			.sc-js-el-show {
+				display: block;
+			}
+		}
+	}
+	.sc-top-bar {
+		&-large {
+			min-height: $top-bar-content-height-large;
+		}
+		&-aside {
+			width: $aside-main-width;
+			border-bottom: 1px solid $border-color;
+			min-height: $top-bar-content-height;
+			background: $white;
+			&-large {
+				width: $aside-main-large-width;
+			}
+			&,
+			&-large {
+				padding: 8px 24px;
+				box-sizing: border-box;
+
+			}
+			&.padding-small {
+				padding: 8px 12px;
+			}
+		}
+		&-content {
+			display: flex;
+			min-height: $top-bar-content-height;
+			align-items: center;
+			padding: 8px 24px;
+			border-bottom: 1px solid $border-color;
+			box-sizing: border-box;
+			z-index: $z-index + 10;
+			position: relative;
+			background: $white;
+			&,
+			&-expanded {
+				&.padding-small {
+					padding: 8px 12px;
+				}
+			}
+			&-expanded {
+				padding: 16px 24px;
+				background: $white;
+				border-top: 1px solid $border-color;
+				@include box-shadow(2);
+				margin-top: -1px;
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				transform: translate3d(0,-100%,0);
+				transition: transform 280ms $easing, opacity 140ms $easing 140ms;
+				z-index: $z-index-topbar;
+				opacity: 0;
+			}
+		}
+		&-title {
+			margin: 0;
+			@include font-size(16px);
+			font-weight: 500;
+		}
+	}
+	&.uk-sticky-fixed {
+		z-index: $z-index-sticky + 50;
+		transition: all 140ms ease-in-out;
+	}
+}
+
+/*
+#sc-top-bar {
+	height: $top-bar-height;
+	background: material-color('grey','900');
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: $z-index + 200;
+	color: $white;
+	line-height: $top-bar-height;
+	padding: 0 25px 0 15px;
+	@include sc-clearfix;
+	.sc-top-nav {
+		float: left;
+		height: $top-bar-height;
+		&,
+		ul,
+		li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		> li {
+			position: relative;
+			display: inline-block;
+			ul {
+				position: absolute;
+				background: rgba(0,0,0,.9);
+				min-width: 200px;
+				top: 0;
+				opacity: 0;
+				visibility: hidden;
+				transition: all 200ms $easing;
+				li {
+					position: relative;
+					a {
+						display: block;
+						color: $white;
+						padding: 4px 10px;
+						@include font-size(14px);
+						&,
+						&:hover,
+						&:focus {
+							text-decoration: none;
+						}
+					}
+					&.sub-nav {
+						> a {
+							position: relative;
+							&:after {
+								@include sc-pseudo;
+								top: 10px;
+								right: 6px;
+								width: 0;
+								height: 0;
+								border: 5px solid transparent;
+								border-left-color: $white;
+							}
+						}
+					}
+					&:hover {
+						> a {
+							&,
+							&:hover,
+							&:focus {
+								background: $theme-color;
+							}
+						}
+						> ul {
+							visibility: visible;
+							opacity: 1;
+						}
+					}
+					+ li {
+						a {
+							border-top: 1px solid rgba(255,255,255,.1)
+						}
+					}
+				}
+			}
+			&:hover {
+				> a {
+					background-color: $theme-color;
+				}
+				> ul {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+			> a {
+				display: inline-block;
+				padding: 0 10px;
+				color: $white;
+				@include font-size(14px);
+				line-height: $top-bar-height;
+				vertical-align: top;
+				&,
+				&:hover,
+				&:focus {
+					text-decoration: none;
+				}
+			}
+			> ul {
+				left: 0;
+				top: $top-bar-height;
+				transition: none;
+				ul {
+					left: 100%;
+				}
+			}
+		}
+	}
+	.sc-top-bar-info {
+		float: right;
+		@include font-size(12px);
+		line-height: $top-bar-height;
+		color: material-color('grey','400');
+	}
+}*/

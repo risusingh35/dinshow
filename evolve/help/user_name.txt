@@ -1,0 +1,32 @@
+WS1
+WA1
+WT1
+WF1
+TIR
+BFW Process User
+Spider Paint User
+CAM
+BRM
+HA1
+DA1
+AT1
+YPS
+PTB
+
+
+
+SELECT  EvolveSo_Number , EvolveDo_Number , EvolveDoLine_CustPart ,EvolveSoLine_Number ,EvolveDoLine_Part ,  ei.EvolveItem_Desc,
+
+(select   esol.EvolveSalesOrderLine_OrderQty 
+ From EvolveSalesOrderLine esol , EvolveDoLine edol
+Where edoh.EvolveSoLine_Number = esol.EvolveSalesOrderLine_Number AND  edoh.EvolveDoLine_Number = edol.EvolveDOLine_Number )  as  EvolveSalesOrderLine_OrderQty,
+
+(select   edol.EvolveDOLine_QtyDO 
+ From EvolveDoLine edol , EvolveSalesOrderLine esol
+Where edoh.EvolveDoLine_Number = edol.EvolveDOLine_Number AND edoh.EvolveSoLine_Number = esol.EvolveSalesOrderLine_Number  )  as  EvolveSalesOrderLine_OrderQty
+
+
+
+FROM EvolveDoHistory edoh , EvolveItem ei
+
+where  edoh.EvolveDoLine_Part =   ei.EvolveItem_Code

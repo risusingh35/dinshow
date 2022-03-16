@@ -1,0 +1,375 @@
+'use strict';
+const Evolve = require('../../../../Boot/Evolve');
+module.exports = {
+
+    getAttrmappingList: async function (req, res) {
+        try {
+            console.log("entering in controller >>> ")
+            let start = parseInt(req.body.startFrom);
+            let length = parseInt(req.body.displayRecord);
+            let search = req.body.search;
+            let count = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.getAttrmappingListCount(search);
+            let list = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.getAttrmappingListDatatable(start, length, search);
+            if (list instanceof Error ) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while gsp api attribute maping list !",
+                    result: list.message
+                };
+                res.send(obj);
+            }else{
+                let resObj = {
+                    noOfRecord: count.recordset[0].count,
+                    records: list.recordset
+                }
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "mapping list ",
+                    result: resObj
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while gsp api attribute maping list "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while gsp api attribute maping list "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+
+    getEDITemplateList: async function (req, res) {
+        try {
+            let list = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.getEDITemplateList();
+            if (list instanceof Error ) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: " EERR####: Error while get gsp api list !",
+                    result: null
+                };
+                res.send(obj);
+            } else if(list.rowsAffected < 1){
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "Gsp Api not Found !",
+                    result: null
+                };
+                res.send(obj);
+
+            }else{
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "Gsp api list",
+                    result: list.recordset
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while get gsp api list "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while get gsp api list "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+    getTemplateAttributes: async function (req, res) {
+        try {
+            let list = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.getTemplateAttributes(req.body);
+            if (list instanceof Error ) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while get api attributes !",
+                    result: null
+                };
+                res.send(obj);
+            } else if(list.rowsAffected < 1){
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "Attributes Not Found",
+                    result: null
+                };
+                res.send(obj);
+
+            }else{
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "Attributes",
+                    result: list.recordset
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while get api attributes "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while get api attributes "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+    getEvolveTableList: async function (req, res) {
+        try {
+            let list = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.getEvolveTableList();
+            if (list instanceof Error ) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while get table list !",
+                    result: null
+                };
+                res.send(obj);
+            } else if(list.rowsAffected < 1){
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "tables not found",
+                    result: []
+                };
+                res.send(obj);
+
+            }else{
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "tables",
+                    result: list.recordset
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while get table list "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while get tables "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+    getTableFields: async function (req, res) {
+        try {
+            let list = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.getTableFields(req.body);
+            if (list instanceof Error ) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while get table fields !",
+                    result: null
+                };
+                res.send(obj);
+            } else if(list.rowsAffected < 1){
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "tables not found",
+                    result: null
+                };
+                res.send(obj);
+
+            }else{
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "tables",
+                    result: list.recordset
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while get table fields "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while get tables fields "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+
+    addEDITemplateAttrMapping: async function (req, res) {
+        try {
+            req.body.EvolveUser_ID = req.EvolveUser_ID;
+           let addMapping = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.addEDITemplateAttrMapping(req.body);
+            if (addMapping instanceof Error || addMapping.rowsAffected < 1) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while add gsp attribute mapping  !",
+                    addMapping: null
+                };
+                res.send(obj);
+            } else {
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "Gsp api attribute mappig added successfully ",
+                    addMapping: null
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while add gsp attribute mapping "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while add gsp attribute mapping "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+    getSingleMappingDetails: async function (req, res) {
+        try {
+            let details = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.getSingleMappingDetails(req.body);
+            if (details instanceof Error || details.rowsAffected < 1) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while get mapping details !",
+                    result: null
+                };
+                res.send(obj);
+            } else {
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "mapping details ",
+                    result: details.recordset[0]
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error("EERR####: Error while get single mapping details "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: "EERR####:Error while get single mapping details "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+
+    updateMappingDetails: async function (req, res) {
+        try {
+            req.body.EvolveUser_ID = req.EvolveUser_ID;
+            let updateDetails = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.updateMappingDetails(req.body);
+            if (updateDetails instanceof Error || updateDetails.rowsAffected < 1) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while update mapping details !",
+                    result: null
+                };
+                res.send(obj);
+            } else {
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "Mapping details updated successfully ",
+                    result: updateDetails.recordset
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while update mapping details "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while update mapping details "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+    deleteEDITemplateAttributesMapping: async function (req, res) {
+        try {
+            req.body.EvolveUser_ID = req.EvolveUser_ID;
+            let updateDetails = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.deleteEDITemplateAttributesMapping(req.body);
+            if (updateDetails instanceof Error) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while Delete mapping details !",
+                    result: null
+                };
+                res.send(obj);
+            } else {
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "Mapping details Delete successfully ",
+                    result: null
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error while delete mapping details "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error while delete mapping details "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    }, 
+    CheckApiAttribute: async function (req, res) {
+        try {
+            req.body.EvolveUser_ID = req.EvolveUser_ID;
+            let result = await Evolve.App.Services.eEdi.EDITemplateAttrMapping.SrvList.CheckApiAttribute(req.body);
+            if (result instanceof Error) {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "EERR####: Error while Check Api Attribut !",
+                    result: null
+                };
+                res.send(obj);
+            } else if(result.rowsAffected < 1){
+                let obj = {
+                    statusCode: 200,
+                    status: "success",
+                    message: "Success",
+                    result: null
+                };
+                res.send(obj);
+            }else {
+                let obj = {
+                    statusCode: 400,
+                    status: "fail",
+                    message: "Api Attribute Already Exists",
+                    result: null
+                };
+                res.send(obj);
+            }
+        } catch (error) {
+            Evolve.Log.error(" EERR####: Error Check Api Attribut "+error.message);
+            let obj = {
+                statusCode: 400,
+                status: "fail",
+                message: " EERR####: Error Check Api Attribut "+error.message,
+                result: null
+            };
+            res.send(obj);
+        }
+    },
+}

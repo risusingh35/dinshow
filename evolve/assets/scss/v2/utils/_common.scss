@@ -1,0 +1,71 @@
+@import "../mixins";
+
+.primary-hoverable-icon {
+    transition: background-color 80ms linear, color 40ms linear;
+
+    &:hover {
+        background-color: $primary-lighten;
+    }
+
+    &:hover .icon {
+        color: $primary;
+    }
+}
+
+@include use-dark {
+    .primary-hoverable-icon {
+        // &:not(.filled):hover {
+        //    // background-color: $bg-dark-4;
+        // }
+
+        &:hover .icon {
+            color: $fr-dark;
+        }
+    }
+}
+
+.tooltip {
+    position: relative;
+
+    .tooltip-content {
+        white-space: nowrap;
+        width: auto;
+        padding: 4px 10px;
+        bottom: -1.8rem;
+        border-radius: 25px;
+        display: block;
+        background-color: $fr-3;
+        opacity: 0.8;
+        color: $white;
+        font-size: 11px;
+        position: absolute;
+        visibility: hidden;
+        text-align: center;
+        z-index: 10;
+        transition: transform 60ms ease, visibility 30ms ease;
+        transform: translateY(-4px) scaleX(0.9);
+    }
+
+    @media screen and (min-width: 767px) {
+        &:hover .tooltip-content {
+            visibility: visible;
+            transform: translateY(0) scaleX(1);
+        }
+    }
+}
+
+@include use-dark {
+    .tooltip {
+        .tooltip-content {
+            background-color: $fr-dark;
+            color: $bg-dark;
+            opacity: 1;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hide-mobile {
+        display: none;
+    }
+}

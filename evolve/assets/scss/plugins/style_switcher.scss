@@ -1,0 +1,119 @@
+@import "../common/md_colors";
+@import "../common/variables_mixins";
+@import "../themes/base";
+
+#sc-style-switcher {
+	position: fixed;
+	top: 20%;
+	right: 0;
+	width: 220px;
+	transform: translateX(272px);
+	transition: all 280ms $easing;
+	background: $white;
+	@include elevation(2);
+	border-radius: 0 0 0 4px;
+	padding: 24px;
+	z-index: $z-index-sidebar - 100;
+	&.active {
+		transform: translateX(0);
+	}
+	.sc-sSw-toggle {
+		color: $theme-color-dark;
+		font-size: 24px;
+		padding: 2px 18px 0 14px;
+		position: absolute;
+		left: -52px;
+		top: 0;
+		width: 20px;
+		height: 40px;
+		display: block;
+		border-radius: 4px 0 0 4px;
+		@include elevation(1);
+		background: $white;
+		cursor: pointer;
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: -2px;
+			width: 4px;
+			height: 100%;
+			background: $white;
+		}
+	}
+	.sc-sSw-theme-switcher {
+		margin-top: -16px !important;
+		&,
+		li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+		li {
+			margin-top: 16px;
+			opacity: 0.4;
+			transition: opacity 140ms ease;
+			position: relative;
+			&:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 50%;
+				margin-left: -12px;
+				display: block;
+				font-family: $mdFont;
+				@include font-size(24px);
+				color: $white;
+				line-height: 1;
+			}
+			a {
+				display: flex;
+				width: 64px;
+				height: 24px;
+				span {
+					width: 50%;
+					&:first-child {
+
+					}
+					&:last-child {
+
+					}
+				}
+			}
+			a.sc-sW-theme-default {
+				span {
+					&:first-child {
+						background: material-color($_theme-color, '600');
+					}
+					&:last-child {
+						background: material-color($_theme-complementary-color, '600');
+					}
+				}
+			}
+			@each $name, $color-1, $color-2 in $themes {
+				a.sc-sW-theme-#{$name} {
+					span {
+						&:first-child {
+							background: material-color($color-1, '600');
+						}
+						&:last-child {
+							background: material-color($color-2, '600');
+						}
+					}
+				}
+			}
+			&:hover,
+			&.active {
+				opacity: 1;
+			}
+			&.active {
+				&:after {
+					content: '\f12c';
+				}
+			}
+		}
+	}
+}

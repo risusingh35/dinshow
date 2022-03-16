@@ -1,0 +1,125 @@
+
+/*
+    --- Text colors --- 
+*/
+.text-inherit {
+    color: inherit;
+}
+
+.text-primary {
+    color: $primary;
+}
+
+.text-success {
+    color: $success;
+}
+
+.text-error {
+    color: $error;
+}
+
+.text-warn {
+    color: $warn;
+}
+
+.text-dark {
+    color: $dark;
+}
+
+.text-light {
+    color: $light;
+}
+
+
+/*
+    --- Background colors --- 
+*/
+.bg-inherit {
+    background-color: inherit;
+    color: inherit;
+}
+
+.bg-primary {
+    background-color: $primary;
+    color: $primary-fr;
+}
+.bg-primary-darken {
+    background-color: $primary-darken;
+    color: $primary-fr;
+}
+
+.bg-success {
+    background-color: $success;
+    color: $success-fr;
+}
+.bg-success-darken {
+    background-color: $success-darken;
+    color: $success-fr;
+}
+
+.bg-error {
+    background-color: $error;
+    color: $error-fr;
+}
+.bg-error-darken {
+    background-color: $error-darken;
+    color: $error-fr;
+}
+
+.bg-warn {
+    background-color: $warn;
+    color: $warn-fr;
+}
+.bg-warn-darken {
+    background-color: $warn-darken;
+    color: $warn-fr;
+}
+
+.bg-dark {
+    background-color: $dark;
+    color: $dark-fr;
+}
+.bg-dark-darken {
+    background-color: $dark-darken;
+    color: $dark-fr;
+}
+
+.bg-light {
+    background-color: $light;
+    color: $light-fr;
+}
+.bg-light-darken {
+    background-color: $light-darken;
+    color: $light-fr;
+}
+
+/*
+    --- Stroke colors --- 
+*/
+.stroke-inherit {
+    border-color: inherit;
+}
+
+.stroke-primary {
+    border-color: $primary;
+}
+
+.stroke-success {
+    border-color: $success;
+}
+
+.stroke-error {
+    border-color: $error;
+}
+
+.stroke-warn {
+    border-color: $warn;
+}
+
+.stroke-dark {
+    border-color: $dark;
+}
+
+.stroke-light {
+    border-color: $light;
+}

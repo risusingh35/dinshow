@@ -1,0 +1,99 @@
+.sc {
+	&-progress {
+		position: relative;
+		max-width: 100%;
+		box-shadow: none;
+		background: rgba(0,0,0,.1);
+		border-radius: 6px;
+		margin-top: 36px;
+		display: flex;
+		&-label {
+			position: absolute;
+			bottom: 100%;
+			@include font-size(12px);
+			width: 100%;
+			color: $text-color-secondary;
+			font-weight: 500;
+			margin-bottom: 4px;
+		}
+		&-bar {
+			position: relative;
+			width: 0;
+			height: 16px;
+			min-width: 12px;
+			background: material-color('grey','400');
+			border-radius: 6px;
+			transition: width 360ms $easing, background-color 140ms $easing;
+			@include font-size(11px);
+			color: $white;
+			line-height: 17px;
+			padding: 0 4px;
+			box-sizing: border-box;
+			overflow: hidden;
+		}
+		&-small {
+			border-radius: $border-radius;
+			.sc-progress-bar {
+				height: 8px;
+				border-radius: $border-radius;
+			}
+		}
+		&-group {
+			.sc-progress-bar {
+				border-radius: $border-radius 0 0 $border-radius;
+				+ .sc-progress-bar {
+					border-radius: 0;
+				}
+				&:last-child {
+					border-radius: 0 $border-radius $border-radius 0;
+				}
+			}
+		}
+		&-indeterminate {
+			overflow: hidden;
+			.sc-progress-bar {
+				width: 100%;
+				animation: indeterminate 2800ms infinite linear;
+			}
+		}
+	}
+}
+
+@keyframes indeterminate {
+	0% {
+		transform: translateX(-100%) scaleX(0.2);
+	}
+	20% {
+		transform: translateX(-40%) scaleX(0.2);
+	}
+	30% {
+		transform: translateX(0%) scaleX(0.5);
+	}
+	55% {
+		transform: translateX(100%) scaleX(0.7);
+	}
+	55.99% {
+		transform: scaleX(0);
+	}
+	56% {
+		transform: translateX(-100%) scaleX(0);
+	}
+	56.99% {
+		transform: translateX(-100%) scaleX(0.6);
+	}
+	75% {
+		transform: translateX(-5%) scaleX(0.6);
+	}
+	85% {
+		transform: translateX(30%) scaleX(0.3);
+	}
+	98% {
+		transform: translateX(100%) scaleX(0.2);
+	}
+	99.99% {
+		transform: scaleX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}

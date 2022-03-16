@@ -1,0 +1,195 @@
+
+// For Route Just Create New File . route Automatic Create By Nuxt Js Framwork.
+
+
+
+// Install all dependencies
+
+yarn install 
+
+
+
+// For Hard Reset
+git reset --hard origin/master
+
+
+// For ignore .nuxt folder
+
+# dependencies
+node_modules
+evolve-universal
+package-lock.json
+
+# other
+.nuxt
+dist
+
+Command : git rm -r --cached .
+
+
+
+
+// Rename Feild Query
+EXEC sp_rename 'EvolveProdPlan.EvolveProdPlan_Shift', 'EvolveProdPlan_ShiftID', 'COLUMN';
+
+EXEC sp_rename 'EvolveInvoice.EvolveInvoice_Type', 'EvolveDocument_ID', 'COLUMN';
+ALTER TABLE EvolveInvoice ALTER COLUMN EvolveDocument_ID Int
+
+
+// Alter Query :
+ 
+ALTER TABLE EvolveDocument ALTER COLUMN EvolveCoordinatesTemplate_ID Int
+
+// Add new Cloumn Query
+  ALTER TABLE EvolveUser ADD  EvolveUser_IsBranchUser bit
+
+ALTER TABLE EvolveCoordinates ADD  EvolveCoordinates_ExtraText varchar(50)
+
+ ALTER TABLE EvolveToken ADD  TimeTest datetime DEFAULT CURRENT_TIMESTAMP
+
+EvolvePDIHistory_Key
+// SQL Script Path
+
+D:\node_app\evolve\help\Evolve_Connect.sql
+
+
+// generate Html Build
+
+yarn generate
+
+
+
+// Truncate Table Query
+
+Truncate Table EvolveProdOrderBom
+Truncate Table EvolveSubConHistory
+Truncate Table EvolvePickList
+Truncate Table EvolvePickListDetail
+Truncate Table EvolveInTransDetail
+Truncate Table EvolveInTransQueue
+Truncate Table EvolveProdOrdersDetailChild
+Truncate Table EvolveProdOrdersHistory
+Truncate Table EvolveProdOrders
+Truncate Table EvolveProdOrdersDetail
+Truncate Table EvolveProdPlan
+Truncate Table EvolveProdPlanDetail
+Truncate Table EvolveReworkSrNo
+Truncate Table EvolvePurchaseOrder
+Truncate Table EvolvePurchaseOrderDetail
+Truncate Table EvolvePOTrans
+Truncate Table EvolveIO
+Truncate Table EvolveIOHistory
+
+/*Truncate Table EvolveInvoice
+Truncate Table EvolveInvoiceLine
+
+Truncate Table EvolveDo
+Truncate Table EvolveDoLine
+Truncate Table EvolveDOLinePDI
+Truncate Table EvolveDOLinePDIDetail
+TRUNCATE TABLE EvolvePDIHistory
+
+Truncate Table EvolveGateExitHistory
+
+Truncate Table EvolvePickList
+Truncate Table EvolvePickListDetail
+
+Truncate Table EvolveSalesOrder
+Truncate Table EvolveSalesOrderLine
+
+Truncate Table EvolveScrap*/
+
+
+
+
+
+//Truncate Table EvolvePurchaseOrder
+//Truncate Table EvolvePurchaseOrderDetail
+//
+
+
+// CSV help
+
+12/08/2019
+
+// Input On key Input
+@input="onTransferBarcodeScane()"
+
+
+// For Select DD list hidden issue 
+
+just set "allowClear: false"
+
+
+// Live Server Change host
+
+	 server: {
+	 	port: 3000, // default: 3000
+		host: '51.79.137.161', // default: localhost,
+	// 	timing: false,
+	// 	https: {
+	// 		key: fs.readFileSync(path.resolve(__dirname, '.https/server.key')),
+	// 		cert: fs.readFileSync(path.resolve(__dirname, '.https/server.crt'))
+	// 	}
+	},
+
+	
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [id]
+	  ,[K3220_077_K3220_077_K3220_Barcode_VALUE] AS Barcode
+	  ,[K3220_077_K3220_077_Machine_Start_VALUE] AS MachinStart
+	  ,[K3220_077_K3220_077_Machine_at_Home_VALUE] AS Home
+      ,[K3220_077_K3220_077_Cycle_Start_VALUE] AS CyclStart
+      ,[K3220_077_K3220_077_Cycle_Stop_VALUE] AS CycleStop
+      ,[K3220_077_K3220_077_Part_NOK_VALUE] AS OK
+      ,[K3220_077_K3220_077_Part_Ok_VALUE] AS NOT_OK
+  FROM [Kepware].[dbo].[k3220] ORDER BY id DESC
+
+
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [EvolveVibration_ID]
+      ,[EvolveVibration_K3220_Barcode_VALUE] AS bar
+      ,[EvolveVibration_Machine_Start_VALUE] AS ms
+      ,[EvolveVibration_Machine_Status_VALUE] AS mss
+      ,[EvolveVibration_Machine_at_Home_VALUE] AS mah
+      ,[EvolveVibration_Machine_at_Home_TIMESTAMP] AS mahT
+      ,[EvolveVibration_Part_NOK_VALUE] AS pnok
+      ,[EvolveVibration_Part_Ok_VALUE] AS po
+      ,[EvolveVibration_Cycle_Start_VALUE] AS cs
+      ,[EvolveVibration_CycleStart_TIMESTAMP] AS cst
+      ,[EvolveVibration_Cycle_Stop_VALUE] AS cstp
+      ,[EvolveVibration_CycleStop_TIMESTAMP] AS cstpt
+      ,[EvolveVibration_Input_Parameter_06_NUMERICID] AS ip6
+      ,[EvolveVibration_Input_Parameter_06_VALUE] AS ip6v
+      ,[EvolveVibration_Input_Parameter_06_TIMESTAMP] AS ip6t
+      ,[EvolveVibration_Input_Parameter_06_QUALITY] AS ip6q
+  FROM [Evolve_ConnectYFAI].[dbo].[EvolveVibration]
+
+
+
+  /* truncate table EvolveVibration */
+
+
+  // Task Kill Command for vbs Script
+
+taskkill /F /IM wscript.exe /T
+
+
+
+
+
+
+
+// Return List of contstants
+
+  SELECT name  
+FROM sys.objects  
+WHERE type = 'UQ' AND OBJECT_NAME(parent_object_id) = 'EvolveCoordinates';  
+GO  
+
+
+// Delete constants
+
+  ALTER TABLE [dbo].[EvolveCoordinates]   
+DROP CONSTRAINT UQ__EvolveCo__C9C5F77E7ECC5B45;  
+GO 

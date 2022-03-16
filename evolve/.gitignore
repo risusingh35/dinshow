@@ -1,0 +1,15 @@
+# dependencies
+node_modules
+evolve-universal
+package-lock.json
+build
+
+#files
+nuxt.config.js
+report.*
+yarn-error.log
+
+# other
+.nuxt
+.env
+dist

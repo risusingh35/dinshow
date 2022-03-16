@@ -1,0 +1,29 @@
+# dependencies
+node_modules
+
+# Folder
+session
+Log
+public
+build
+csv
+ERP
+
+# exclude everything
+build/*
+public/*
+build_old/*
+build_old2/*
+build_old3/*
+
+# exception to the rule
+!build/.gitkeep 
+!public/.gitkeep 
+
+# Files
+Config/Database.js
+package-lock.json
+Custom/test.js
+
+# Environment File
+.env

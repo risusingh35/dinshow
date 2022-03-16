@@ -1,0 +1,118 @@
+// @import "../scss/vars";
+@import "../../assets/scss/v2/main.scss";
+@import "../../assets/scss/v2/utils/colors";
+
+@mixin flat-hover ($classname) {
+    &:hover {
+        @extend #{$classname};
+    }
+}
+
+@mixin flat-style {
+    &.flat {
+        background-color: $bg-2;
+        color: $fr-1;
+        transition: background-color 50ms linear;
+    
+        &.primary {
+            @extend .bg-primary;
+            @include flat-hover('.bg-primary-darken');
+        }
+        &.success {
+            @extend .bg-success;
+            @include flat-hover('.bg-success-darken');
+        }
+        &.error {
+            @extend .bg-error;
+            @include flat-hover('.bg-error-darken');
+        }
+        &.warn {
+            @extend .bg-warn;
+            @include flat-hover('.bg-warn-darken');
+        }
+        &.dark {
+            @extend .bg-dark;
+            @include flat-hover('.bg-dark-darken');
+        }
+        &.light {
+            @extend .bg-light;
+            @include flat-hover('.bg-light-darken');
+        }
+    }
+}
+
+@mixin outline-hover ($classname) {
+    &:hover {
+        @extend #{$classname};
+    }
+}
+
+@mixin outlined-style {
+
+    &.outlined {
+        background-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+        transition: background-color 40ms linear;
+
+        &.primary {
+            @extend .stroke-primary;
+            @extend .text-primary;
+            @include outline-hover('.bg-primary');
+        }
+        &.success {
+            @extend .stroke-success;
+            @extend .text-success;
+            @include outline-hover('.bg-success');
+        }
+        &.error {
+            @extend .stroke-error;
+            @extend .text-error;
+            @include outline-hover('.bg-error');
+        }
+        &.warn {
+            @extend .stroke-warn;
+            @extend .text-warn;
+            @include outline-hover('.bg-warn');
+        }
+        &.dark {
+            @extend .stroke-dark;
+            @extend .text-dark;
+            @include outline-hover('.bg-dark');
+        }
+        &.light {
+            @extend .stroke-light;
+            @extend .text-light;
+            @include outline-hover('.bg-light');
+        }
+    }
+}
+
+@mixin text-style {
+    &.text {
+        background-color: transparent;
+
+        &:hover {
+            opacity: 0.6;
+        }
+        
+        &.primary {
+            @extend .text-primary;
+        }
+        &.success {
+            @extend .text-success;
+        }
+        &.error {
+            @extend .text-error;
+        }
+        &.warn {
+            @extend .text-warn;
+        }
+        &.dark {
+            @extend .text-dark;
+        }
+        &.light {
+            @extend .text-light;
+        }
+    }
+}

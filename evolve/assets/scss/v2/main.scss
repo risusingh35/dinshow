@@ -1,0 +1,67 @@
+// import Questrial fonts
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+// import Inter fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+// import Google Material Icons
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@import './vars';
+@import './utils/anim';
+@import "./utils/colors";
+@import "./mixins";
+@import "./custom";
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: $secondary-font-stack;
+    background-color: $primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 8px;
+    font-family: $primary-font-stack;
+    font-weight: normal;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.2rem;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+hr {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    border-style: solid;
+    border-width: 1px;
+    border-top-width: 0;
+    border-color: $stroke;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+@include use-dark {
+    hr {
+        border-color: $stroke-dark-3;
+    }
+}
+
+input {
+    font-family: $secondary-font-stack;
+}
+
+::selection {
+    background-color: $primary;
+    color: $primary-fr;
+}

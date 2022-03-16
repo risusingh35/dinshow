@@ -1,0 +1,45 @@
+@import '../../assets/scss/v2/vars';
+@import "../../assets/scss/v2/mixins";
+@import '../../assets/scss/v2/utils/common';
+
+@mixin fill-button ($bgcolor, $frcolor) {
+    background-color: $bgcolor;
+    color: $frcolor;
+
+    .icon {
+        color: $frcolor;
+    }
+
+    .badge {
+        background-color: $frcolor;
+        color: $bgcolor;
+    }
+}
+
+@mixin use-filled-style {
+    &.filled {
+        &.primary {
+            @include fill-button($primary, $primary-fr);
+        }
+
+        &.success {
+            @include fill-button($success, $success-fr);
+        }
+
+        &.warn {
+            @include fill-button($warn, $warn-fr);
+        }
+
+        &.error {
+            @include fill-button($error, $error-fr);
+        }
+
+        &.dark {
+            @include fill-button($dark, $dark-fr);
+        }
+
+        &.light {
+            @include fill-button($light, $light-fr);
+        }
+    }
+}

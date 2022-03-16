@@ -1,0 +1,146 @@
+@import "./mixins";
+@import "./vars";
+
+#sc-page-top-bar {
+    min-height: 50px !important;
+   // margin-top: 1rem !important;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    z-index: 100 !important;
+
+    .sc-top-bar-content {
+        z-index: 120 !important;
+       // border-top-left-radius: inherit;
+        // border-top-right-radius: inherit;
+    }
+}
+
+#sc-page-wrapper {
+  //  padding-left: 8px !important;
+  //  padding-right: 8px !important;
+  padding: 0px;
+}
+
+.uk-modal {
+    .uk-modal-header {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+    .uk-modal-dialog {
+        border-radius: 12px;
+    }
+}
+
+.uk-notification {
+    .uk-notification-message {
+        border-radius: 12px;
+    }
+}
+
+.sc-button {
+    text-transform: capitalize;
+    border-radius: 8px; 
+    // min-width: 0px;
+    // padding: 11px 14PX;
+    // margin: 0; 
+    // font-weight: 200 !important;
+    // font-size: 12PX !important;
+    // line-height: 0px !important;
+    // height: auto;
+    // width: auto !important;
+
+}
+
+@include use-dark {
+    h1,
+    h2, 
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $fr-dark-1;
+    }
+    
+    .uk-card {
+        background-color: $bg-dark-1;
+        color: $fr-dark-1;
+
+        .uk-card-title {
+            color: $fr-dark;
+        }
+        
+        .uk-card-body {
+            color: $fr-dark-1;
+        }
+    }
+
+    .uk-text-meta {
+        color: $fr-dark-2;
+    }
+
+    .sc-actions-icon::before {
+        color: $fr-dark-1;
+    }
+
+    .sc-color-secondary {
+        color: $fr-dark-3 !important;
+    }
+
+    .sc-progress-label {
+        color: $fr-dark-3 !important;
+    }
+
+    #sc-page-top-bar {
+        .sc-button {
+            background-color: $bg-dark-4;
+            color: $fr-dark-1;
+            border: 1px solid $stroke-3;
+        }
+    }
+
+
+    // to negative colors
+    canvas.chartjs-render-monitor {
+        filter: invert(1);
+    }
+
+    .uk-modal {
+        .uk-modal-dialog {
+            background-color: $bg-dark-1;
+            color: $fr-dark-1;
+
+            .uk-modal-header {
+                background-color: transparent;
+            }
+
+            .uk-modal-footer {
+                background-color: transparent;
+            }
+        }
+    }
+
+    .uk-table {
+        tr {
+            th {
+                color: $fr-dark;
+            }
+        }
+    }
+
+    // keep initial colors
+    .sc-chart-widget canvas.chartjs-render-monitor {
+        filter: invert(0);
+    }
+
+    #sc-page-top-bar {
+        background-color: $bg-dark-2 !important;
+
+        .sc-top-bar-title {
+            font-weight: 600;
+        }
+
+        .sc-top-bar-content {
+            background-color: inherit;
+        }
+    }
+};

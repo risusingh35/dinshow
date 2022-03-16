@@ -1,0 +1,45 @@
+$scrollbar-thumb-color: rgb(53, 53, 53);
+
+@mixin regular-scrollbar {
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        height: 30%;
+        scrollbar-color: $scrollbar-thumb-color;
+        border-radius: 0px;
+        background-color: $scrollbar-thumb-color;
+        // background-color: transparent;
+        //transition: background-color 70ms linear;
+    }
+
+    // &:hover {
+    //     &::-webkit-scrollbar-thumb {
+    //         background-color: $fr-6;
+
+    //         &:active {
+    //             background-color: $fr-5;
+    //         }
+    //     }
+    // }
+}
+
+.regular-scroll {
+    @include regular-scrollbar();
+}
+
+// @include use-dark {
+//     .regular-scroll {
+//         &:hover {
+//             &::-webkit-scrollbar-thumb {
+//                 background-color:#0000; // $stroke-dark-3;
+    
+//                 &:active {
+//                     background-color: #0000; //$stroke-dark-4;
+//                 }
+//             }
+//         }
+//     }
+// }

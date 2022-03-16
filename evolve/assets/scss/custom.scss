@@ -1,0 +1,636 @@
+.menu_icon_custom{
+    top: 2px !important;
+    position: relative;
+}
+.btn_custom_with_icon{
+    padding-top: 2px !important;
+}
+
+.upload_file_lbl{
+	top : -4px !important;	
+}
+.header_lag_widht {
+    width: 60px !important;
+}
+
+.top-bar-menu {
+    background-color: #fff;
+	border-bottom: 1px solid #d6cccc;
+	display: table;   /* Allow the centering to work */
+	margin: 0 auto;
+	width: 100%;
+	padding-left: 25px;
+}
+ul#horizontal-list {
+    list-style: none;
+    padding-top: 2px;
+	padding-bottom: 0px;
+	margin-bottom: 2px;
+}
+ul#horizontal-list li {
+	display: inline;
+	padding: 5px;
+}
+
+.top-menu-icon:before {
+    font-size: 13px;
+}
+
+ul#horizontal-list a {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.selected-app {
+    background-color: #00acc1;
+    border-radius: 5px;
+    padding: 2px 7px;
+    color: #FFF;
+}
+
+span.select2-selection.select2-selection--multiple {
+    min-height: 30px;
+    height: 0px !important;
+}
+.select2-container--default .select2-search--inline .select2-search__field {
+    margin: 0px !important;
+    line-height: 0px  !important;
+}
+li.select2-selection__choice {
+    margin: 0px !important;
+    font-size: 12px !important;
+}
+
+.no-cursor {
+    cursor: no-drop !important;
+    pointer-events: none;
+}
+
+
+
+.datatable-print-button {
+    margin-right: 4px !important;
+    //border-radius: 5px;
+    height: 28px;
+    min-width: 60px;
+    padding: 4px 6px;
+    //font-weight: 800 !important;
+    //font-size: 14px !important;
+    //font-size: 0.775rem !important;
+    line-height: 21px !important;
+
+
+    border-radius: 0px;
+    font-size: 12px !important;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: 400 !important;
+}
+
+
+
+
+
+
+// Header Countries
+
+img.countries-flags {
+    margin: 0px;
+	padding: 5px;
+    width: 100%;
+    border-radius: 10px !important;
+}
+
+img.countries-flag {
+    margin: 0px;
+	padding: 5px;
+	height: 30px;
+    width: 100%;
+}
+
+a.countries-link {
+    padding: 0px !important;
+}
+
+.countries-flags {
+    min-width: 37px !important;
+    max-width: 50px;
+    text-align: center;
+}
+.center-div {
+    text-align: center;
+
+}
+// .sc-input-wrapper{
+// 	margin: -13px;
+// }
+
+// Body Css
+body {
+    background: #FFFFFF !important;
+}
+.sc-login-page body {
+    padding: 0px !important;
+    overflow-y: hidden !important;
+
+}
+.div_login_background {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    height: 969px !important;
+ }
+div#nav-mdi {
+    box-shadow: none !important;
+}
+
+
+// Custom Css For Select & Input
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+	border-radius: 5px !important;
+	height: 30px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	line-height: 30px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 30px !important;
+}
+
+.sc-input-outline {
+	// border: 1px solid rgba(0, 0, 0, 0.08) !important;
+	// height: 30px !important;
+}
+
+.uk-card-body:not([class*="sc-padding"]) {
+    padding: 0px 0px !important;
+}
+.uk-grid + .uk-grid, .uk-grid > .uk-grid-margin {
+    margin-top: 5px !important;
+}
+.float-left {
+	float: left;
+}
+.float-right {
+	float: right;
+}
+.button-margin-top{
+    margin-top: 26px !important;
+}
+
+.uk-table thead th {
+    font-weight: 400 !important;
+    padding: 3px !important;
+    font-size: 12px !important;
+    position: sticky;
+    top: 0px;
+}
+.min-height-back{
+	min-height: 460px;
+}
+.select2-container {
+    z-index: 1000 !important;
+}
+.select2-container--open {
+    z-index: 1800 !important;
+}
+.small-text span {
+    font-size: 11px;
+    font-weight: 500;
+}
+.background {
+	//background: aliceblue;
+	background : #62809666;
+}
+
+.select-evolve-custom {
+    height: 30px !important;
+    line-height: 15px !important;
+}
+
+.full-width {
+	width: 100% !important;
+}
+
+.scroll  {
+    height: 400px !important;
+    overflow: scroll;
+}
+
+.div-height{
+    height: 150px !important;
+}
+.border-left{
+    border-left: 1px solid #f3e4e4;
+}
+// Table 
+
+
+// Manufacturing Process
+
+.big_font {
+    font-size: 21px;
+    font-weight: bold;
+    padding: 6px;
+    height: 28px;
+}
+
+.action_messgae{
+    border: 1px solid #797474;
+    border-radius: 5px;
+    font-size: 21px;
+    font-weight: bold;
+    padding: 6px;
+    color: red;
+}
+
+
+
+// Header Menu
+
+#sc-sidebar-main{
+    width: 300px;
+}
+
+@media (min-width: 960px){
+    #sc-sidebar-main .uk-offcanvas-bar {
+        width: 300px ;
+    }
+}
+    
+// Datatable No Of Record CSS
+
+div#sc-dt-buttons-table_length {
+    float: left !important;
+}
+
+
+
+// End Table
+
+// Pegination  CSS
+
+ul.evolve_paginate li {
+  padding: 0px 14px !important;
+font-weight: 500;
+  float: left;
+  text-decoration: none;
+}
+ul.evolve_paginate {
+  list-style-type: none;
+  float: right;
+}
+.paginate {
+    float: right;
+    position: fixed;
+    bottom: 23px;
+    font-size: 16px;
+    width: 80%;
+    background-color: white;
+    padding-top: 7px;
+}
+
+ul.evolve_paginate li.active a {
+    color: #FFF !important;
+    font-size: 14px;
+}
+
+ul.evolve_paginate li.active {
+    background: #1565c0;
+    padding: 1px 8px;
+    border-radius: 6px;
+}
+ 
+
+
+/** Mobile CSS **/ 
+
+@media only screen and (max-width: 600px) {
+    .div_login_background {
+        height: auto !important;
+    }
+
+    .sc-sidebar-main-slide #sc-sidebar-main {
+        overflow: visible !important;
+    }
+    .sc-sidebar-main-slide #sc-sidebar-main .sc-sidebar-menu > li > a .uk-nav-title {
+        opacity: 1 !important;
+    }
+
+}
+
+
+
+/** Menu CSS for New Design */
+.evolve-page-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #cecece;
+    width: 100%;
+    position: static;
+    display: table;
+}
+.evolve-page-header-icons-lable {
+    padding-top: 10px;
+}
+.evolve-page-header-divider {
+    border: 0.01px solid #e0e0e0;
+    margin: 3px 0px;
+}
+ 
+.evolve-page-header-icons {
+    float: left;
+    border-right: 1px solid #b5b7b9;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.evolve-float-right {
+    float: right;
+}
+
+.header-button-evolve {
+    margin: 7px 7px !important;
+}
+
+a#app-view-active-user-profile-button img {
+    background: #fff;
+    border-radius: 50%;
+}
+
+.uk-input {
+    // border-radius: 0;
+    // color: rgba(0, 0, 0, 0.87);
+    // background-color: #fff;
+    // padding: 4px 8px;
+    // font-size: 8px;
+    //  font-size: 0.875rem; 
+    // height: 24px;
+    // width: 133px; 
+
+    /*color: rgba(0, 0, 0, 0.87);
+    border-radius: 0px !important;
+    width: 140px;
+    font-size: 12px;
+    border-color: #000;
+    float: right;
+    height: 25px !important;*/
+
+
+}
+
+
+.uk-overflow-auto {
+    margin-top: 5px;
+}
+
+.uk-table {
+    margin-top: 0px;
+}
+
+
+.uk-table td {
+    padding: 8px 0px 10px 3px;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: 100;
+    line-height: 11px;
+    vertical-align: middle;
+}
+
+.mdi:before {
+    font-size: 18px;
+     
+}
+
+
+div#evolve_tabs_contecnt_root {
+    margin: 0px;
+    height: 100%;
+    margin-top: 35px;
+}
+
+div#nav-mdi {
+    margin: 0px;
+    height: 100%;
+}
+
+div#sc-page-content{
+    margin: 0px;
+    height: calc(96vh - 110px); //100%;
+    background-color: white;
+    border-radius: 10px 0px 0px 0px;
+    overflow: scroll;
+}
+
+div#sc-page-wrapper {
+    margin: 0px;
+    height: calc(100vh - 100px); //100%;
+}
+.evolve-tab-content{
+    margin: 0px;
+    height:  calc( 100vh - 100px ); //100%;
+    background: white;
+}
+.evolve-page {
+    margin: 0px;
+    height: calc( 100vh - 100px ); // 100%;
+    background-color: #fff;
+    overflow: hidden;
+}
+.evolve-page-body {
+    margin: 0px;
+    height: calc(100vh - 100px); // 100%;
+    margin-top: 10px;
+    padding: 0% 1% 0% 1%;
+     
+}
+
+.evolve_table_list{
+    height: calc(100vh - 189px);
+    overflow: scroll;
+}
+
+.evolve-input {
+    border-radius: 4px !important;
+    width: 100%;
+    font-size: 12px;
+    border-color: #979292;
+    float: left;
+    height: 30px;
+}
+
+.select2-container {
+    font-size: 12px;
+    border-radius: 0px !important;
+    border-color: #000;
+    width: 100% !important;
+    height: 25px;
+}
+
+// label {
+    
+//     font-size: 14px !important;
+//     font-family: sans-serif !important;
+//     padding-right: 8px !important;
+//     line-height: 17px;
+// }
+
+.evolve-input-lable {
+    font-size: 14px;
+    font-family: sans-serif;
+    padding-right: 8px;
+    float: right;
+    margin-top: 4px;
+}
+
+
+table.evolve-form-table td {
+    width: 300px;
+    padding: 6px 1px;
+    text-align: right;
+}
+
+.evolve-select {
+    border-radius: 4px !important;
+    width: 100%;
+    font-size: 12px;
+    border-color: #979292;
+    float: left;
+    height: 30px;
+}
+
+.evolve-redio {
+    float: left;
+    line-height: 0px;
+    margin: 0px;
+    text-align: left;
+    width: 140px;
+}
+.evolve-checkbox {
+    margin: 0px;
+    float: left;
+    text-align: left;
+    width: 140px;
+}
+
+.evolve-textarea {
+    width: 97%;
+    float: left;
+    border-color: #979292;
+    border-radius: 4px !important;
+    padding: 3px;
+}
+
+.app-icon-button.small {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 0px !important;
+}
+
+.mdi{
+    color: #3b66b5;
+}
+
+
+.evolve-select2Search {
+    float: right;
+}
+
+ 
+.evolve-scinput {
+    float: right;
+    width: auto;
+}
+
+span.select2-selection.select2-selection--single {
+    border-radius: 0px !important;
+    width: 100%;
+    font-size: 12px;
+    border-color: #000;
+    float: right;
+    height: 25px;
+}
+ 
+
+.uk-grid {
+    margin-left: 0px;
+    margin-top: 8px;
+}
+.uk-grid > * {
+    padding-left: 0px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+
+/**CSS Change for Temp */
+
+// .container {
+//     margin-top: 4px !important;
+// }
+ 
+
+.sc-button-outline {
+    box-shadow: none !important;
+    border: 1px solid #000;
+    line-height: 18px !important;
+    color: rgba(0, 0, 0, 0.87);
+    background: none;
+    margin: 0px 3px;
+    width: 115px;
+    text-align: right;
+    border-radius: 2px;
+}
+
+
+
+
+.app-icon-button .icon{
+    //font-size: 26px;
+    color: #6c757d !important;
+}
+
+.nav-menu-item .app-icon-button .icon {
+    font-size: 24px!important;
+}
+
+
+
+// Css for Table 
+
+ 
+
+.evolve_table_data {
+    overflow-y: auto;
+    height: 76vh !important;
+}
+
+div#evolve_tabs_root{
+    position: fixed;
+}
+.evolve_table_header_filer {
+    position: sticky;
+    top: 0;
+}
+
+
+// top Header bar 
+
+.evolve-page-header-icons button {
+    margin: 4px 7px;
+}
+
+.evolve-page-header-icons .evolve-input {
+    margin: 4px 7px 5px 7px;
+}
+.evolve-page-header-icons p {
+    margin: 9px 7px;
+}
+
+

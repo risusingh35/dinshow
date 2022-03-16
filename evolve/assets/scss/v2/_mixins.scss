@@ -1,0 +1,25 @@
+
+@mixin xy-center-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin x-center-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin use-dark {
+    body.dark {
+        @content;
+    }
+}
+
+@mixin use-native-dark {
+    @media (prefers-color-scheme: dark) {
+       @content;
+    }
+}
