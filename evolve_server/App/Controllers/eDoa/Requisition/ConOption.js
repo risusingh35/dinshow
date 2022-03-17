@@ -40,6 +40,7 @@ module.exports = {
         }
     },
     getAdressList: async function (req, res) {
+        // console.log("re.body>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",req.body);
         try {
             let result = await Evolve.App.Services.eDoa.Requisition.SrvOption.getAdressList(req.body);
             if (result instanceof Error) {
@@ -467,7 +468,7 @@ module.exports = {
         try {
             let prHead = await Evolve.App.Services.eDoa.Requisition.SrvOption.getPrHeadDetails(req.body.EvolvePR_ID);
 
-            console.log("getSinglePrData,prHead>>>>>>>>>>>>>>>>>>>>>>>conlist",prHead);
+            // console.log("getSinglePrData,prHead>>>>>>>>>>>>>>>>>>>>>>>conlist",prHead);
 
             if (prHead instanceof Error || prHead.rowsAffected < 1) {
                 Evolve.Log.error("EERR#### : Error while get Requisition Head Details ")

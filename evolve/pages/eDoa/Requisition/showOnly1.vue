@@ -62,15 +62,6 @@
 												</div>
 												<!-- //UK Model start -->
 												<div class="uk-modal-body">
-													<PrettyCheck
-														v-model="isItemActive"
-														:disabled="isSavedDisabled"
-														class="p-switch pretty"
-														name="isItemActive"
-													>
-														{{ translate.is_item_active }}
-													</PrettyCheck>
-
 													<div
 														class="uk-child-width-1-3@m uk-grid"
 														data-uk-grid
@@ -81,21 +72,10 @@
 																	<label
 																		for="table lable"
 																		class="evolve-input-lable"
-																	>{{ translate.item }}{{ itemCode }}
-																	</label>
+																	>{{ translate.item }} {{ itemCode }}</label>
 																</div>
 																<div class="uk-width-1-2@m">
-																	<ScInput
-																		v-if="isItemActive == true"
-																		v-model="itemId"
-																		:disabled="isSavedDisabled"
-																		name="itemId"
-																		mode="outline"
-																		placeholder="ITEM CODE"
-																	></ScInput>
-
 																	<Select2Search
-																		v-else
 																		v-model="itemId"
 																		:disabled="isSavedDisabled"
 																		name="itemId"
@@ -121,14 +101,6 @@
 																</div>
 																<div class="uk-width-1-2@m">
 																	<ScInput
-																		v-if="isItemActive == true"
-																		v-model="itemDesc"
-																		name="itemDesc"
-																		mode="outline"
-																		:placeholder="translate.item_desc"
-																	></ScInput>
-																	<ScInput
-																		v-else
 																		v-model="itemDesc"
 																		name="itemDesc"
 																		mode="outline"
@@ -148,14 +120,6 @@
 																</div>
 																<div class="uk-width-1-2@m">
 																	<ScInput
-																		v-if="isItemActive == true"
-																		v-model="itemUom"
-																		name="itemUom"
-																		mode="outline"
-																		:placeholder="translate.uom"
-																	></ScInput>
-																	<ScInput
-																		v-else
 																		v-model="itemUom"
 																		name="itemUom"
 																		mode="outline"
@@ -176,7 +140,7 @@
 																	<label
 																		for="table lable"
 																		class="evolve-input-lable"
-																	>{{ translate.need_date }} : </label>
+																	>{{ translate.need_date }}</label>
 																</div>
 																<div class="uk-width-1-2@m">
 																	<ScInput
@@ -257,7 +221,9 @@
 																</div>
 																<div class="uk-width-1-2@m">
 																	<ScInput
-																		v-model="itemPrice"
+																		v-model="$v.itemPrice.$model"
+																		:error-class="$v.itemPrice.$error"
+																		:validator="$v.itemPrice"
 																		:disabled="isSavedDisabled"
 																		name="itemPrice"
 																		type="number"
@@ -280,7 +246,9 @@
 																</div>
 																<div class="uk-width-1-2@m">
 																	<ScInput
-																		v-model="totalItemPrice"
+																		v-model="$v.totalItemPrice.$model"
+																		:error-class="$v.totalItemPrice.$error"
+																		:validator="$v.totalItemPrice"
 																		name="totalItemPrice"
 																		type="number"
 																		mode="outline"
@@ -325,7 +293,8 @@
 										<div class="uk-grid" data-uk-grid>
 											<div class="uk-width-1-2@m"></div>
 											<div class="uk-width-1-2@m">
-												<span>{{ selectedSupplier1 }}</span>
+												<span><span>{{ selectedShipTo2 }}</span>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -333,19 +302,17 @@
 										<div class="uk-grid" data-uk-grid>
 											<div class="uk-width-1-2@m"></div>
 											<div class="uk-width-1-2@m">
-												<span><span>{{ selectedShipTo2 }}</span>
-												</span>
+												<span>{{ selectedSupplier1 }}</span>
 											</div>
 										</div>
 									</div>
 
-									<!-- p-switch pretty -->
 									<div class="uk-width-1-4@m">
 										<div class="uk-grid" data-uk-grid>
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.category
-												}} : </label>
+												}}</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<Select2
@@ -382,18 +349,18 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.req_nbr
-												}} : </label>
+												}}</label>
 											</div>
 
 											<div class="uk-width-1-2@m">
 												<ScInput
 													v-model="$v.reqNo.$model"
+													:disabled="isSavedDisabled"
 													:error-class="$v.reqNo.$error"
 													:validator="$v.reqNo"
 													name="reqNo"
 													mode="outline"
 													:placeholder="translate.req_nbr"
-													disabled
 												></ScInput>
 											</div>
 										</div>
@@ -403,7 +370,7 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.supplier
-												}} : </label>
+												}}</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<Select2Search
@@ -429,7 +396,7 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable"
 													class="evolve-input-lable"
-												>{{ translate.shipto }} : 
+												>{{ translate.shipto }}
 												</label>
 											</div>
 
@@ -492,7 +459,7 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable"
 													class="evolve-input-lable"
-												>{{ translate.project }} : </label>
+												>{{ translate.project }}:</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<Select2
@@ -526,9 +493,9 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.buyer
-												}} : </label>
+												}}</label>
 											</div>
-											<div class="uk-width-1-2@m">
+											<div class="uk-width-1-3@m">
 												<Select2
 													v-model="$v.buyerId.$model"
 													:error-class="$v.buyerId.$error"
@@ -560,18 +527,18 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.user
-												}} : </label>
+												}}</label>
 											</div>
-											<div class="uk-width-1-2@m">
+											<div class="uk-width-1-3@m">
 												<Select2
 													v-model="$v.endUserId.$model"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													:settings="{
 														width: '100%',
 														placeholder: 'SELECT',
 														allowClear: true,
 													}"
-													name="endUserId"
+													name="EndUserId"
 													:error-class="$v.endUserId.$error"
 													:validator="$v.endUserId"
 												>
@@ -594,12 +561,12 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.sub_account
-												}} : </label>
+												}}</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<ScInput
 													v-model="$v.subAcc.$model"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="subAcc"
 													mode="outline"
 													placeholder="SUB-ACCOUNT"
@@ -614,12 +581,12 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.cost_center
-												}} : </label>
+												}}</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<ScInput
 													v-model="$v.costCenter.$model"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="costCenter"
 													mode="outline"
 													placeholder="COST CENTER"
@@ -635,7 +602,7 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.req_date
-												}} : </label>
+												}}</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<ScInput
@@ -661,7 +628,7 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.pr_end_date
-												}} : </label>
+												}}</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<ScInput
@@ -672,7 +639,7 @@
 														allowInput: false,
 														minDate: 'today',
 													}"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="headerNeedDate"
 													placeholder="Select Date.."
 													mode="outline"
@@ -685,7 +652,7 @@
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
 													translate.pr_due_date
-												}} : </label>
+												}}</label>
 											</div>
 											<div class="uk-width-1-2@m">
 												<ScInput
@@ -696,7 +663,7 @@
 														allowInput: false,
 														minDate: 'today',
 													}"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="headerDueDate"
 													placeholder="Select Date.."
 													mode="outline"
@@ -704,14 +671,17 @@
 											</div>
 										</div>
 									</div>
-									<div class="uk-width-1-3@m">
+								</div>
+
+								<div class="uk-width-1-2@m uk-grid" data-uk-grid>
+									<div class="uk-width-1-1@m">
 										<div class="uk-grid" data-uk-grid>
-											<div class="uk-width-1-2@m">
+											<div class="uk-width-1-3@m">
 												<label for="table lable"
 													class="evolve-input-lable"
-												>{{ translate.remarks }} : </label>
+												>{{ translate.remarks }}:</label>
 											</div>
-											<div class="uk-width-1-2@m">
+											<div class="uk-width-2-3@m">
 												<ScTextarea
 													v-model="$v.addtionalRemarks.$model"
 													:error-class="$v.addtionalRemarks.$error"
@@ -725,14 +695,16 @@
 											</div>
 										</div>
 									</div>
-									<div class="uk-width-1-3@m">
+								</div>
+								<div class="uk-width-1-2@m uk-grid" data-uk-grid>
+									<div class="uk-width-1-1@m">
 										<div class="uk-grid" data-uk-grid>
-											<div class="uk-width-1-2@m">
+											<div class="uk-width-1-3@m">
 												<label for="table lable"
 													class="evolve-input-lable"
 												>{{ translate.details }}:</label>
 											</div>
-											<div class="uk-width-1-2@m">
+											<div class="uk-width-2-3@m">
 												<ScTextarea
 													v-model="$v.shipToDetails.$model"
 													:error-class="$v.shipToDetails.$error"
@@ -748,98 +720,97 @@
 									</div>
 								</div>
 							</div>
-							<div class="uk-width-1-1@m"></div>
-							<div class="uk-text-right uk-width-1-1@m">
-								<button
-									:disabled="isSavedDisabled"
-									class="sc-button datatable-print-button sc-button-primary"
-									type="submit"
-									data-uk-toggle="target : #pr_line"
-									@click="resetLineDetails()"
-								>
-									{{ translate.addnewline }}
-								</button>
-							</div>
-							<div class="uk-child-width-1-1@m uk-grid" data-uk-grid>
-								<div>
-									<div class="uk-overflow-auto">
-										<client-only>
-											<table class="uk-table uk-table-striped">
-												<thead>
-													<tr>
-														<th>{{ translate.line_no }}</th>
-														<th>{{ translate.need_date }}</th>
-														<th>{{ translate.due_date }}</th>
-														<th>{{ translate.item_code }}</th>
-														<th>{{ translate.item_desc }}</th>
-														<!-- <th>UOM</th> -->
-														<th>{{ translate.qty }}</th>
-														<th>{{ translate.per_unit_cost }}</th>
-														<th>
-															{{ translate.total_cost }} <br>({{ totalCost }})
-														</th>
-														<th>{{ translate.actions }}</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr
-														v-for="(line, index) in lineDetailList"
-														:key="index"
-													>
-														<td>{{ line.EvolvePRDetails_LineNo }}</td>
-														<td>{{ line.EvolvePRDetails_NeedDate }}</td>
-														<td>{{ line.EvolvePRDetails_DueDate }}</td>
-														<td>{{ line.EvolveItem_Code }}</td>
-														<td>{{ line.EvolveItem_Desc }}</td>
+						</div>
+						<div class="uk-width-1-1@m"></div>
+						<div class="uk-text-right uk-width-1-1@m">
+							<button
+								:disabled="isLableDisabled"
+								class="sc-button datatable-print-button sc-button-primary"
+								type="submit"
+								data-uk-toggle="target : #pr_line"
+								@click="resetLineDetails()"
+							>
+								{{ translate.addnewline }}
+							</button>
+						</div>
+						<div class="uk-child-width-1-1@m uk-grid" data-uk-grid>
+							<div>
+								<div class="uk-overflow-auto">
+									<client-only>
+										<table class="uk-table uk-table-striped">
+											<thead>
+												<tr>
+													<th>{{ translate.line_no }}</th>
+													<th>{{ translate.need_date }}</th>
+													<th>{{ translate.due_date }}</th>
+													<th>{{ translate.item_code }}</th>
+													<th>{{ translate.item_desc }}</th>
+													<!-- <th>UOM</th> -->
+													<th>{{ translate.qty }}</th>
+													<th>{{ translate.per_unit_cost }}</th>
+													<th>
+														{{ translate.total_cost }} <br>({{ totalCost }})
+													</th>
+													<th>{{ translate.actions }}</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													v-for="(line, index) in lineDetailList"
+													:key="index"
+												>
+													<td>{{ line.EvolvePRDetails_LineNo }}</td>
+													<td>{{ line.EvolvePRDetails_NeedDate }}</td>
+													<td>{{ line.EvolvePRDetails_DueDate }}</td>
+													<td>{{ line.EvolveItem_Code }}</td>
+													<td>{{ line.EvolveItem_Desc }}</td>
 
-														<td>{{ line.EvolvePRDetails_Qty }}</td>
-														<td>{{ line.EvolvePRDetails_ItemUnitPrice }}</td>
-														<td>{{ line.EvolvePRDetails_ItemTotalPrice }}</td>
-
-														<td>
-															<button
-																title="Edit"
-																class="
+													<td>{{ line.EvolvePRDetails_Qty }}</td>
+													<td>{{ line.EvolvePRDetails_ItemUnitPrice }}</td>
+													<td>{{ line.EvolvePRDetails_ItemTotalPrice }}</td>
+													<td>
+														<button
+															title="Edit"
+															class="
                                 sc-button sc-button-primary
                                 waves-effect
                                 sc-button-mini
                                 waves-button waves-light
                               "
-																@click="getSingleLineDetails(index)"
-															>
-																<i class="mdi mdi-eye"></i>
-															</button>
-															<button
-																:disabled="isSavedDisabled"
-																title="Edit"
-																class="
+															@click="getSingleLineDetails(index)"
+														>
+															<i class="mdi mdi-eye"></i>
+														</button>
+														<button
+															:disabled="isSavedDisabled"
+															title="Edit"
+															class="
                                 sc-button sc-button-primary
                                 waves-effect
                                 sc-button-mini
                                 waves-button waves-light
                               "
-																@click="getSingleLineDetails(index)"
-															>
-																<i class="mdi mdi-square-edit-outline"></i>
-															</button>
-															<button
-																:disabled="isSavedDisabled"
-																title="Delete"
-																class="
+															@click="getSingleLineDetails(index)"
+														>
+															<i class="mdi mdi-square-edit-outline"></i>
+														</button>
+														<button
+															:disabled="isSavedDisabled"
+															title="Delete"
+															class="
                                 sc-button sc-button-danger
                                 waves-effect
                                 sc-button-mini
                               "
-																@click="onDeleteLine(index)"
-															>
-																<i class="mdi mdi-delete"></i>
-															</button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</client-only>
-									</div>
+															@click="onDeleteLine(index)"
+														>
+															<i class="mdi mdi-delete"></i>
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</client-only>
 								</div>
 							</div>
 						</div>
@@ -856,7 +827,7 @@ import { validationMixin } from "vuelidate";
 import ScInput from "~/components/Input";
 import ScTextarea from "~/components/Textarea";
 
-import PrettyCheck from "pretty-checkbox-vue/check";
+// import PrettyCheck from 'pretty-checkbox-vue/check';
 
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 import Input from "../../../components/Input.vue";
@@ -865,7 +836,6 @@ import Input from "../../../components/Input.vue";
 if (process.client) {
 	require("~/plugins/daterangepicker");
 	require("~/plugins/flatpickr");
-	//   import PrettyCheck from "pretty-checkbox-vue/check";
 	var Paginate = require("vuejs-paginate");
 }
 
@@ -878,7 +848,6 @@ export default {
 	layout: "eDefault",
 	components: {
 		ScInput,
-		PrettyCheck,
 		Select2: process.client ? () => import("~/components/Select2") : null,
 		Select2Search: process.client
 			? () => import("~/components/ajaxSearch/Select2Search")
@@ -891,7 +860,6 @@ export default {
 	data () {
 		return {
 			translate: {
-                	is_item_active:"ITEM IS ACTIVE",
 				line_no: "LINE NO",
 				item_desc: "ITEM DESCRIPTION",
 				uom: "UOM",
@@ -910,8 +878,8 @@ export default {
 				per_unit_cost: "PER UNIT COST",
 				total_cost: "TOTAL COST",
 				actions: "ACTIONS",
-				user: "END USER",
-				shipto: "SHIP TO",
+				user: "End User",
+				shipto: "SHIP TO:",
 				addnewline: "ADD NEW LINE",
 				price: "PRICE",
 				item: "ITEM:",
@@ -959,7 +927,7 @@ export default {
 			endUserId: "",
 			subAcc: "",
 			costCenter: "",
-
+			isSavedDisabled: true,
 			userList: [],
 			approvalList: [],
 			remarks: "",
@@ -1008,10 +976,8 @@ export default {
         this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getItemList",
 			getCustList:
         this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getSupList",
-			// 	getShipList:
-			// this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getShipList",
-		
- 	getShipList:this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getAdressList",
+			getShipList:
+        this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getShipList",
 			lineDetailList: [],
 			prId: "",
 			isLableDisabled: true,
@@ -1026,17 +992,13 @@ export default {
 			shipToAdress: "",
 			billToAddress: "",
 			shipToDetails: "",
-			selectedSupplier1: "",
-			selectedShipTo2: "",
-			endUserList: "",
-			isSavedDisabled: true,
+
 			projectId: "",
 			documentList: [],
 			currencyList: [],
 			buyerId: "",
 			selectedShipTo: "",
 			categoryList: [],
-			isItemActive: false,
 		};
 	},
 	computed: {},
@@ -1145,12 +1107,12 @@ export default {
 		// itemQty: {
 		//  	required,
 		// },
-		// itemPrice: {
-		// 	required,
-		// },
-		// totalItemPrice: {
-		// 	required,
-		// },
+		itemPrice: {
+			required,
+		},
+		totalItemPrice: {
+			required,
+		},
 	},
 
 	methods: {
@@ -1211,8 +1173,6 @@ export default {
 			this.itemId = "";
 			this.itemDesc = "";
 			this.itemQty = "";
-			this.itemPrice = "";
-			this.totalItemPrice = "";
 
 			this.currentLineIndex = null;
 		},
@@ -1347,13 +1307,7 @@ export default {
 				this.itemId != "" &&
         this.itemQty != "" &&
         this.itemId != null &&
-        this.itemQty != null &&
-        this.itemPrice != null &&
-        this.itemPrice != "" &&
-        this.NeedDate != null &&
-        this.NeedDate != "" &&
-        this.dueDate != null &&
-        this.dueDate != ""
+        this.itemQty != null
 			) {
 				if (this.currentLineIndex == null) {
 					console.log("ifffffffffffffffffffffffffffffffffffff");
@@ -1400,7 +1354,7 @@ export default {
 				}
 				await this.getTotalCustPrice();
 				UIkit.modal("#pr_line").hide();
-				// await this.resetLineDetails();
+				await this.resetLineDetails();
 			} else {
 				this.notification(
 					"danger",
@@ -1445,7 +1399,11 @@ export default {
 			// alert(this.itemQty)
 			this.$v.$touch();
 			if (this.$v.$invalid) {
-				this.notification("danger", 3000, "Please Field All Required fields ");
+				this.notification(
+					"danger",
+					3000,
+					"Please Field All Required fields pakku!"
+				);
 			} else if (this.lineDetailList.length == 0) {
 				this.notification("danger", 3000, "Please Add Line Details");
 			} else {
@@ -1453,7 +1411,7 @@ export default {
 					EvolvePR_ID: this.prId,
 					EvolvePR_NO: this.reqNo,
 					EvolveCategory_ID: this.categoryId,
-					EvolveAddress_ID: this.shipToAddId,
+					EvolveShipTo_ID: this.shipToAddId,
 					EvolvePR_CurrencyID: this.currencyId,
 					EvolveSupplier_ID: parseInt(this.supplierID),
 					EvolveProject_ID: this.projectId,
@@ -1515,7 +1473,7 @@ export default {
 				}
 			}
 
-			this.isSavedDisabled = true;
+			this.isSavedDisabled = false;
 		},
 		async getTotalCustPrice () {
 			let totalCost = 0;
@@ -1548,10 +1506,6 @@ export default {
 				});
 
 			if (prDetails.statusCode == 200) {
-				console.log(
-					"this.subAc  prDetails.result.prHead[0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
-					prDetails.result.prHead[0]
-				);
 				if (prDetails.result.prHead[0].EvolvePR_Status == "SAVED") {
 					this.isSubmitAllow = true;
 					this.isSaveAllow = true;
@@ -1584,7 +1538,6 @@ export default {
 				this.supplierID = prDetails.result.prHead[0].EvolveSupplier_ID + "";
 
 				this.subAcc = prDetails.result.prHead[0].EvolvePR_SubAccount;
-
 				this.costCenter = prDetails.result.prHead[0].EvolvePR_CostCenter;
 				this.headerNeedDate = prDetails.result.prHead[0].headerNeedDate + "";
 				this.headerDueDate = prDetails.result.prHead[0].headerDueDate + "";
@@ -1597,7 +1550,7 @@ export default {
 					this.supplierID
 				);
 				this.unitId = prDetails.result.prHead[0].EvolveUnit_ID + "";
-				this.shipToAddId = prDetails.result.prHead[0].EvolveAddress_ID + "";
+				this.shipToAddId = prDetails.result.prHead[0].EvolveShipTo_ID + "";
 				this.reqDate = prDetails.result.prHead[0].reqDate + "";
 				this.addtionalRemarks = prDetails.result.prHead[0].EvolvePR_Rmrks + "";
 
@@ -1653,7 +1606,8 @@ export default {
         	: this.lineDetailList[index].EvolvePRDetails_DueDate + "";
 
 			this.itemCode = this.lineDetailList[index].EvolveItem_Code + "";
-			this.itemPrice = this.lineDetailList[index].EvolvePRDetails_ItemUnitPrice;
+			this.itemPrice =
+        this.lineDetailList[index].EvolvePRDetails_ItemUnitPrice + "";
 			this.totalItemPrice =
         this.lineDetailList[index].EvolvePRDetails_ItemTotalPrice + "";
 
@@ -1671,9 +1625,7 @@ export default {
 			if (this.shipToAddId != "") {
 				let details = await this.$axios
 					.$post("/api/v1/eDoa/Requisition/getShipToDetails", {
-						EvolveAddress_ID: this.shipToAddId,
-						// EvolveAddress_ID
-						// EvolveShipTo_ID
+						EvolveShipTo_ID: this.shipToAddId,
 					})
 					.catch((e) => {
 						this.notification(
@@ -1683,29 +1635,28 @@ export default {
 						);
 					});
 				if (details.statusCode == 200) {
-					console.log("details>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", details);
 					this.shipToAdress =
-            (details.result.EvolveAddress_Street1 == null
+            (details.result.EvolveShipTo_Address1 == null
             	? ""
-            	: details.result.EvolveAddress_Street1) +
+            	: details.result.EvolveShipTo_Address1) +
             " " +
-            (details.result.EvolveAddress_Street2 == null
+            (details.result.EvolveShipTo_Address2 == null
             	? ""
-            	: details.result.EvolveAddress_Street2) +
+            	: details.result.EvolveShipTo_Address2) +
             " " +
-            (details.result.EvolveAddress_Street3 == null
+            (details.result.EvolveShipTo_Address3 == null
             	? ""
-            	: details.result.EvolveAddress_Street3) +
+            	: details.result.EvolveShipTo_Address3) +
             " " +
-            (details.result.EvolveAddress_City == null
+            (details.result.EvolveShipTo_State == null
             	? ""
-            	: details.result.EvolveAddress_City);
+            	: details.result.EvolveShipTo_State);
 					this.shipToDetails = "Ship TO : " + this.shipToAdress;
 					this.selectedShipTo =
-            details.result.EvolveAddress_Code +
+            details.result.EvolveShipTo_Code +
             " " +
-            details.result.EvolveAddress_SearchName;
-					this.selectedShipTo1 = details.result.EvolveAddress_Code;
+            details.result.EvolveShipTo_Name;
+					this.selectedShipTo1 = details.result.EvolveShipTo_Code;
 				} else {
 					this.notification("danger", 3000, details.message);
 				}

@@ -5,7 +5,7 @@ module.exports = {
   getRequisitionListCount: async function (search, subQuery) {
     try {
       let query = "SELECT  COUNT(epr.EvolvePR_ID) as count  FROM EvolvePR epr WHERE   epr.EvolvePR_NO LIKE @search " + subQuery;
-      console.log("query.>>> ", query)
+      // console.log("query.>>> ", query)
       return await Evolve.SqlPool.request()
         .input('search', Evolve.Sql.NVarChar, '%' + search + '%')
 
@@ -327,7 +327,7 @@ module.exports = {
   },
   getApprovalProccessDetails: async function (data) {
     try {
-      console.log("data >>>" ,  data)
+      // console.log("data >>>" ,  data)
       let query;
       query = " SELECT eap.* ,  eapm.EvolveApprovalMatrix_Name , eapm.EvolveApprovalMatrix_Code ,eapm.EvolveApprovalMatrix_Type ,eapm.EvolveApprovalMatrix_IsEmailNotif , eapm.EvolveApprovalMatrix_IsMessageNotif , eapm.EvolveApprovalMatrix_IsWPMessageNotif ,  eapm.EvolveApprovalMatrix_IsQxtendReq  FROM EvolveApprovalProcess eap  ,  EvolveApprovalMatrix eapm     WHERE eap.EvolveApprovalMatrix_ID = eapm.EvolveApprovalMatrix_ID AND eap.EvolveApprovalProcess_PrimaryID = @EvolveApprovalProcess_PrimaryID AND eapm.EvolveApprovalMatrix_Type =@EvolveApprovalMatrix_Type"
       return await Evolve.SqlPool.request()
@@ -399,20 +399,4 @@ module.exports = {
       return new Error(" EERR####: Error While Get Single Requisition Detail  " + error.message);
     }
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -19,13 +19,13 @@ module.exports = {
         error = true;
         error = "Error while get user branch details";
       } else {
-        let isBuyer = false;
+        let isBuyer = true;
 
         let roleList =
           await Evolve.App.Services.eDoa.Requisition.SrvList.getUserRoleDetails(
             req.EvolveUser_ID
           );
-        console.log("getUserRoleDetails>>>>>>>>>>>>>>>>>", roleList);
+        // console.log("getUserRoleDetails>>>>>>>>>>>>>>>>>", roleList);
         if (roleList instanceof Error || roleList.rowsAffected < 1) {
           Evolve.Log.error(" EERR####: Error while get User Role Details ");
           error = true;
@@ -96,7 +96,7 @@ module.exports = {
                     list.recordset[i]
                   );
 
-                console.log("processDetails>> ", processDetails);
+                // console.log("processDetails>> ", processDetails);
 
                 if (list instanceof Error || list.rowsAffected < 1) {
                   error = true;
@@ -305,6 +305,7 @@ module.exports = {
   },
 
   submitToApprovelProcess: async function (req, res) {
+    console.log("req.body>>>>>>>>>>>>>",req.body);
     try {
       let error = false;
       let errorMessage = "Error While Submit Sales Quote";
@@ -312,12 +313,13 @@ module.exports = {
       req.body.EvolveUser_ID = req.EvolveUser_ID;
       req.body.EvolveApprovalMatrix_ID = 0;
       req.body.EvolveApprovalMatrix_Type = "PURCHASEREQUISITION";
-      req.body.EvolveApprovalProcess_PrimaryID = req.body.EvolvePR_I;
+      req.body.EvolveApprovalProcess_PrimaryID = req.body.EvolvePR_ID;
 
       let prLineDetails =
         await Evolve.App.Services.eDoa.Requisition.SrvOption.getPrLineDetails(
           req.body.EvolvePR_ID
         );
+        console.log("PR LINE DETAILES>>>>>>>>>>>>>>>>>>>",prLineDetails);
       if (prLineDetails instanceof Error || prLineDetails.rowsAffected < 1) {
         error = true;
         errorMessage = "ERROR WHILE GET REQUIESITION LINE DETAILS";
