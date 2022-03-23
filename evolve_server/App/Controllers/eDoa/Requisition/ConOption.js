@@ -358,7 +358,7 @@ module.exports = {
 
     saveRequisitionDetails: async function (req, res) {
         try {
-            console.log("req.body>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>saveRequisitionDetails",req.body);
+            // console.log("req.body>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>saveRequisitionDetails",req.body);
             let isError = false;
             req.body.EvolvePR_TotalCost = (req.body.EvolvePR_TotalCost==null || req.body.EvolvePR_TotalCost==undefined || req.body.EvolvePR_TotalCost==NaN || req.body.EvolvePR_TotalCost=='') ? null : parseFloat(req.body.EvolvePR_TotalCost.toString().replace(/,/g, ""));
 
@@ -442,7 +442,7 @@ module.exports = {
                         PRDetails[i].EvolveUser_ID = req.EvolveUser_ID;
                         let saveLineDetails = await Evolve.App.Services.eDoa.Requisition.SrvOption.savePRLineDetails(PRDetails[i]);
                         if (saveLineDetails instanceof Error || saveLineDetails.rowsAffected < 1) {
-                            isError = 'Error While Save PR Line Details';
+                            error = 'Error While Save PR Line Details';
                         }
                     }
 
@@ -511,9 +511,6 @@ module.exports = {
             res.send(obj);
         }
     },
-
-
-
 
     getReqSerialNo: async function (req, res) {
         try {

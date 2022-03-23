@@ -782,7 +782,7 @@
 															<i class="mdi mdi-eye"></i>
 														</button>
 														<button
-															:disabled="isSavedDisabled"
+															:disabled="isLableDisabled"
 															title="Edit"
 															class="
                                 sc-button sc-button-primary
@@ -795,7 +795,7 @@
 															<i class="mdi mdi-square-edit-outline"></i>
 														</button>
 														<button
-															:disabled="isSavedDisabled"
+															:disabled="isLableDisabled"
 															title="Delete"
 															class="
                                 sc-button sc-button-danger

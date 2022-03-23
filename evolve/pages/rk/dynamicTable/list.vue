@@ -82,7 +82,9 @@ export default {
 	beforeMount () {},
 	mounted () {},
 	beforeDestroy () {},
-	created: async function () {},
+	created: async function () {
+		// this.getList();	 
+	},
 
 	methods: {
         		refreshPage: async function () {

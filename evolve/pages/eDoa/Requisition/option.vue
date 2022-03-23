@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<!-- :disabled="isSavedDisabled" -->
 		<!-- V3 Setup Start>>>>>>>>>>>>>-->
 		<div class="evolve-page-header">
 			<div class="evolve-page-header-icons evolve-float-right">
@@ -27,7 +26,7 @@
 										<button
 											v-if="isSaveAllow"
 											class="sc-button datatable-print-button sc-button-primary"
-											:disabled="isSavedDisabled"
+											:disabled="isLableDisabled"
 											@click="savePr(true)"
 										>
 											{{ translate.save }}
@@ -64,7 +63,7 @@
 												<div class="uk-modal-body">
 													<PrettyCheck
 														v-model="isItemActive"
-														:disabled="isSavedDisabled"
+														:disabled="isLableDisabled"
 														class="p-switch pretty"
 														name="isItemActive"
 													>
@@ -87,9 +86,9 @@
 																<div class="uk-width-1-2@m">
 																	<ScInput
 																		v-if="isItemActive == true"
-																		v-model="itemId"
-																		:disabled="isSavedDisabled"
-																		name="itemId"
+																		v-model="itemCode"
+																		:disabled="isLableDisabled"
+																		name="itemCode"
 																		mode="outline"
 																		placeholder="ITEM CODE"
 																	></ScInput>
@@ -97,7 +96,7 @@
 																	<Select2Search
 																		v-else
 																		v-model="itemId"
-																		:disabled="isSavedDisabled"
+																		:disabled="isLableDisabled"
 																		name="itemId"
 																		:settings="{
 																			width: '100%',
@@ -123,6 +122,7 @@
 																	<ScInput
 																		v-if="isItemActive == true"
 																		v-model="itemDesc"
+																		:disabled="isLableDisabled"
 																		name="itemDesc"
 																		mode="outline"
 																		:placeholder="translate.item_desc"
@@ -150,6 +150,7 @@
 																	<ScInput
 																		v-if="isItemActive == true"
 																		v-model="itemUom"
+																		:disabled="isLableDisabled"
 																		name="itemUom"
 																		mode="outline"
 																		:placeholder="translate.uom"
@@ -187,7 +188,7 @@
 																			allowInput: false,
 																			minDate: 'today',
 																		}"
-																		:disabled="isSavedDisabled"
+																		:disabled="isLableDisabled"
 																		name="NeedDate"
 																		:placeholder="translate.select_date"
 																		mode="outline"
@@ -212,7 +213,7 @@
 																			allowInput: false,
 																			minDate: 'today',
 																		}"
-																		:disabled="isSavedDisabled"
+																		:disabled="isLableDisabled"
 																		name="dueDate"
 																		:placeholder="translate.select_date"
 																		mode="outline"
@@ -232,7 +233,7 @@
 																<div class="uk-width-1-2@m">
 																	<ScInput
 																		v-model="itemQty"
-																		:disabled="isSavedDisabled"
+																		:disabled="isLableDisabled"
 																		name="itemQty"
 																		type="number"
 																		mode="outline"
@@ -258,7 +259,7 @@
 																<div class="uk-width-1-2@m">
 																	<ScInput
 																		v-model="itemPrice"
-																		:disabled="isSavedDisabled"
+																		:disabled="isLableDisabled"
 																		name="itemPrice"
 																		type="number"
 																		mode="outline"
@@ -304,7 +305,7 @@
 															{{ translate.cancel }}
 														</button>
 														<button
-															:disabled="isSavedDisabled"
+															:disabled="isLableDisabled"
 															class="sc-button"
 															type="button"
 															@click="saveLineData()"
@@ -350,7 +351,7 @@
 											<div class="uk-width-1-2@m">
 												<Select2
 													v-model="$v.categoryId.$model"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="categoryId"
 													:error-class="$v.categoryId.$error"
 													:validator="$v.categoryId"
@@ -565,7 +566,7 @@
 											<div class="uk-width-1-2@m">
 												<Select2
 													v-model="$v.endUserId.$model"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													:settings="{
 														width: '100%',
 														placeholder: 'SELECT',
@@ -599,7 +600,7 @@
 											<div class="uk-width-1-2@m">
 												<ScInput
 													v-model="$v.subAcc.$model"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="subAcc"
 													mode="outline"
 													placeholder="SUB-ACCOUNT"
@@ -619,7 +620,7 @@
 											<div class="uk-width-1-2@m">
 												<ScInput
 													v-model="$v.costCenter.$model"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="costCenter"
 													mode="outline"
 													placeholder="COST CENTER"
@@ -672,7 +673,7 @@
 														allowInput: false,
 														minDate: 'today',
 													}"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="headerNeedDate"
 													placeholder="Select Date.."
 													mode="outline"
@@ -696,7 +697,7 @@
 														allowInput: false,
 														minDate: 'today',
 													}"
-													:disabled="isSavedDisabled"
+													:disabled="isLableDisabled"
 													name="headerDueDate"
 													placeholder="Select Date.."
 													mode="outline"
@@ -751,7 +752,7 @@
 							<div class="uk-width-1-1@m"></div>
 							<div class="uk-text-right uk-width-1-1@m">
 								<button
-									:disabled="isSavedDisabled"
+									:disabled="isLableDisabled"
 									class="sc-button datatable-print-button sc-button-primary"
 									type="submit"
 									data-uk-toggle="target : #pr_line"
@@ -798,7 +799,7 @@
 
 														<td>
 															<button
-																:disabled="isSavedDisabled"
+																:disabled="isLableDisabled"
 																title="Edit"
 																class="
                                 sc-button sc-button-primary
@@ -811,7 +812,7 @@
 																<i class="mdi mdi-square-edit-outline"></i>
 															</button>
 															<button
-																:disabled="isSavedDisabled"
+																:disabled="isLableDisabled"
 																title="Delete"
 																class="
                                 sc-button sc-button-danger
@@ -1201,6 +1202,7 @@ export default {
 			this.itemQty = "";
 			this.itemPrice = "";
 			this.totalItemPrice = "";
+			this.isItemActive=false;
 
 			this.currentLineIndex = null;
 		},
@@ -1304,6 +1306,8 @@ export default {
 					.$post("/api/v1/eDoa/Requisition/getItemDetails", {
 						EvolveItem_ID: this.itemId,
 						EvolveUnit_ID: this.unitId,
+						EvolvePRDetails_IsMemoItem:this.isItemActive,
+						EvolveItem_Code:this.itemCode,
 					})
 					.catch((e) => {
 						this.notification(
@@ -1325,28 +1329,49 @@ export default {
 				this.itemDesc = "";
 				this.itemCode = "";
 				this.itemUom = "";
+				this.NeedDate=''
+				this.dueDate=''
 				this.lineItemMrp = "";
 				this.lineAgreementDiscount = "";
+				 
 			}
 		},
 		async saveLineData () {
 			this.itemQty = this.itemQty.replace(/,/g, "");
-			if (
-				this.itemId != "" &&
-        this.itemQty != "" &&
-        this.itemId != null &&
-        this.itemQty != null &&
-        this.itemPrice != null &&
-        this.itemPrice != "" &&
-        this.NeedDate != null &&
-        this.NeedDate != "" &&
-        this.dueDate != null &&
-        this.dueDate != ""
-			) {
+			if ((this.itemId != ''&&  this.itemId != null) ||( this.itemCode != '' &&  this.itemCode != null)
+			
+			&&  this.itemDesc != '' && this.itemDesc != null && this.itemQty != '' &&   this.itemQty != null
+			//  && this.itemPrice!=null && this.itemPrice!='' 
+			// && this.needDate!=null && this.needDate!=''
+			// && this.dueDate!=null && this.dueDate!='' 
+			// && this.itemCode != '' &&  this.itemCode != null && this.itemUom != '' && this.itemUom != null
+			
+			)
+				
+			// 		this.itemId != "" &&
+			// this.itemQty != "" &&
+			// this.itemId != null &&
+			// this.itemQty != null &&
+			// this.itemPrice != null &&
+			// this.itemPrice != "" &&
+			// this.NeedDate != null &&
+			// this.NeedDate != "" &&
+			// this.dueDate != null &&
+			// this.dueDate != ""
+			 {
 				if (this.currentLineIndex == null) {
 					console.log("ifffffffffffffffffffffffffffffffffffff");
+					let itemCode				
+					if (this.isItemActive==true){
+						 itemCode=this.itemCode
+					}
+					else{
+					 itemCode=this.itemCode
+					}
 					this.lineDetailList.push({
-						EvolveItem_Code: this.itemCode,
+						EvolvePRDetails_IsMemoItem:this.isItemActive,
+						EvolveItem_Code :itemCode,
+						EvolveUom_Uom : this.itemUom,
 						EvolveItem_Desc: this.itemDesc,
 						EvolveItem_ID: this.itemId,
 						EvolvePRDetails_LineNo: this.lineDetailList.length + 1,
@@ -1386,9 +1411,10 @@ export default {
 						this.currentLineIndex
 					].EvolvePRDetails_ItemTotalPrice = this.totalItemPrice;
 				}
+				
 				await this.getTotalCustPrice();
 				UIkit.modal("#pr_line").hide();
-				// await this.resetLineDetails();
+				await this.resetLineDetails();
 			} else {
 				this.notification(
 					"danger",
@@ -1438,6 +1464,7 @@ export default {
 				this.notification("danger", 3000, "Please Add Line Details");
 			} else {
 				let quoteDetails = {
+
 					EvolvePR_ID: this.prId,
 					EvolvePR_NO: this.reqNo,
 					EvolveCategory_ID: this.categoryId,
@@ -1629,7 +1656,7 @@ export default {
 			this.itemQty =
         parseFloat(this.lineDetailList[index].EvolvePRDetails_Qty).toFixed(2) +
         "";
-			await this.getItemDetails();
+		
 			this.NeedDate =
         this.lineDetailList[index].EvolvePRDetails_NeedDate == null
         	? ""
@@ -1651,7 +1678,8 @@ export default {
 					""
 				)
 			);
-
+			 this.isItemActive = this.lineDetailList[index].EvolvePRDetails_IsMemoItem
+			await this.getItemDetails();
 			UIkit.modal("#pr_line").show();
 		},
 

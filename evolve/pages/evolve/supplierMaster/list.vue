@@ -1,33 +1,47 @@
 <template>
-	<div id="sc-page-wrapper" class="uk-flex uk-flex-column">
-		<no-ssr> 
-			<div id="sc-page-top-bar"
-				class="sc-top-bar"
-				data-uk-sticky="offset:48; show-on-up: true; animation: uk-animation-slide-top-medium"
-			>
-				<div class="sc-top-bar-content uk-flex uk-flex-1">
-					<h1 class="sc-top-bar-title uk-text-uppercase uk-flex-1">
-						{{ translate.supplier_master }}
-					</h1>
-					<button class="sc-button datatable-print-button" @click="downloadCsv()">
-						CSV
-					</button>
-					<button class="sc-button datatable-print-button" @click="downloadPdf()">
-						PDF
-					</button>
-				</div>
+	<div>
+		<!-- V3 Setup Start>>>>>>>>>>>>>-->
+		<div class="evolve-page-header">
+			<div class="evolve-page-header-icons">
+				<!-- <a class="sc-actions-icon mdi mdi-refresh  md-color-light-green-600" @click="getAllMenuList()"></a> -->
+				<a href="javascript:void(0)" class="sc-actions-icon mdi mdi-fullscreen mdi-fullscreen"></a> 
+				<a href="javascript:void(0)" class="sc-actions-icon mdi  mdi-window-minimize"></a>
 			</div>
-		</no-ssr>
-		<div id="sc-page-content ">
-			<div id="nav-mdi" class="uk-card">
-				<div class="uk-card-body min-height-back">
-					<!-- <div class="uk-child-width-1-5@m uk-grid" data-uk-grid>
+			 
+			<div v-if="EvolveMenu_Id" class="evolve-page-header-icons">
+				<a href="javascript:void(0)" data-uk-tooltip="title: Add To Favourite; pos: right" class="sc-actions-icon mdi mdi-star md-color-yellow-600" @click="$store.dispatch('addToFavouriteClick', EvolveMenu_Id)"></a>
+			</div>
+			<div class="evolve-page-header-icons evolve-float-right"> 
+				<a href="javascript:void(0)" class="sc-actions-icon mdi mdi-close-box md-color-red-600" @click="$store.dispatch('removeOneTab',pageURL)"></a>
+			</div>
+			
+			<!-- <div class="evolve-page-header-icons evolve-float-right">
+				<button
+					class="sc-button sc-button-mini header-button-evolve"
+					type="button"
+					@click="onCreateOrEditMenu('')"
+				>
+					{{ translate.create }}
+				</button>
+			</div> -->
+			 
+			<div class="evolve-page-header-icons evolve-float-right">
+				<a href="javascript:void(0)" class="sc-actions-icon mdi mdi-file-excel md-color-indigo-600" @click="downloadCsv()"></a>
+				<a href="javascript:void(0)" class="sc-actions-icon mdi mdi-file-pdf md-color-red-600" @click="downloadPdf()"></a>
+			</div>
+		</div>
+		
+		<client-only>
+			<div id="sc-page-content" class="evolve-page-body">
+				<div id="nav-mdi" class="uk-card">
+					<div class="uk-card-body min-height-back">
+						<!-- <div class="uk-child-width-1-5@m uk-grid" data-uk-grid>
 						<div class=" uk-margin-top "> 
-							<no-ssr>                                
+							<client-only>                                
 								<button class="sc-button sc-button-primary full-width" type="button" @click="downloadSample()">
 									{{ translate.download_sample }}
 								</button>
-							</no-ssr>
+							</client-only>
 						</div>
 						<div>
 						</div>    
@@ -45,115 +59,116 @@
 							</div>
 						</div>
 					</div> -->
-					<div class="uk-child-width-1-1@m uk-grid" data-uk-grid>
-						<div>
-							<div class="uk-overflow-auto">
-								<client-only>
-									<select v-model="displayRecord" @change="onDisplayRecordChange($event)">
-										<option v-for="dr in displayRow" :key="dr" :value="dr">
-											{{ dr }}
-										</option>
-									</select>
-								</client-only>
-								<client-only>
-									<input v-model="search"
-										type="text"
-										placeholder="Search Here"
-										style="float: right !important;"
-										@input="onInputSearch()"
-									>
-								</client-only>
-								<client-only>
-									<div id="evolveSupplier">
-										<table id="evolveCustomerMaster" class="uk-table uk-table-striped">
-											<thead>
-												<tr>
-													<th style="width: 200px !important;">
-														{{ translate.supplier_name }}
-													</th>
-													<th>{{ translate.supplier_code }}</th>
-													<!-- <th>{{ translate.customer_city }}</th> -->
-													<th>{{ translate.supplier_state }}</th>
-													<!-- <th>{{ translate.customer_country }}</th> -->
-													<!-- <th>{{ translate.customer_zip }}</th> -->
-													<!-- <th>{{ translate.customer_contact_person }}</th> -->
-													<!-- <th>{{ translate.customer_contact_number }}</th> -->
-													<!-- <th>{{ translate.email }}</th> -->
-													<!-- <th>{{ translate.gstin }}</th> -->
-													<th>{{ translate.supplier_is_active }}</th>
-													<th>{{ translate.supplier_currency }}</th>
-													<th>{{ translate.supplier_shipvia }}</th>
-													<th>{{ translate.supplier_remarks }}</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr v-for="(cust,index) in customerList" :key="index">
-													<td>{{ cust.EvolveSupplier_Name }}</td>
-													<td>{{ cust.EvolveSupplier_Code }}</td>
-													<!-- <td>{{ cust.EvolveSupplier_City }}</td> -->
-													<td>{{ cust.EvolveSupplier_State }}</td>
-													<!-- <td>{{ cust.EvolveSupplier_Country }}</td> -->
-													<!-- <td>{{ cust.EvolveSupplier_Zip }}</td> -->
-													<!-- <td>{{ cust.EvolveSupplier_ContactPerson }}</td> -->
-													<!-- <td>{{ cust.EvolveSupplier_Phone }}</td> -->
-													<!-- <td>{{ cust.EvolveSupplier_Email }}</td> -->
-													<!-- <td>{{ cust.EvolveSupplier_Gstin }}</td> -->
-													<td>{{ cust.EvolveSupplier_IsActive }}</td>
-													<td>{{ cust.EvolveSupplier_Currency }}</td>
-													<td>{{ cust.EvolveSupplier_ShipVia }}</td>
-													<td>{{ cust.EvolveSupplier_Remarks }}</td>
-												</tr>
-											</tbody>
-										</table>
-										<div class="paginate">
-											<Paginate
-												:page-count="pageCount"
-												:click-handler="paginateClick"
-												:prev-text="'<'"
-												:next-text="'>'"
-												:value="currentPage"
-												:container-class="'evolve_paginate'"
-											></Paginate>
+						<div class="uk-child-width-1-1@m uk-grid" data-uk-grid>
+							<div>
+								<div class="uk-overflow-auto">
+									<client-only>
+										<select v-model="displayRecord" @change="onDisplayRecordChange($event)">
+											<option v-for="dr in displayRow" :key="dr" :value="dr">
+												{{ dr }}
+											</option>
+										</select>
+									</client-only>
+									<client-only>
+										<input v-model="search"
+											type="text"
+											placeholder="Search Here"
+											style="float: right !important;"
+											@input="onInputSearch()"
+										>
+									</client-only>
+									<client-only>
+										<div id="evolveSupplier">
+											<table id="evolveCustomerMaster" class="uk-table uk-table-striped">
+												<thead>
+													<tr>
+														<th style="width: 200px !important;">
+															{{ translate.supplier_name }}
+														</th>
+														<th>{{ translate.supplier_code }}</th>
+														<!-- <th>{{ translate.customer_city }}</th> -->
+														<th>{{ translate.supplier_state }}</th>
+														<!-- <th>{{ translate.customer_country }}</th> -->
+														<!-- <th>{{ translate.customer_zip }}</th> -->
+														<!-- <th>{{ translate.customer_contact_person }}</th> -->
+														<!-- <th>{{ translate.customer_contact_number }}</th> -->
+														<!-- <th>{{ translate.email }}</th> -->
+														<!-- <th>{{ translate.gstin }}</th> -->
+														<th>{{ translate.supplier_is_active }}</th>
+														<th>{{ translate.supplier_currency }}</th>
+														<th>{{ translate.supplier_shipvia }}</th>
+														<th>{{ translate.supplier_remarks }}</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(cust,index) in customerList" :key="index">
+														<td>{{ cust.EvolveSupplier_Name }}</td>
+														<td>{{ cust.EvolveSupplier_Code }}</td>
+														<!-- <td>{{ cust.EvolveSupplier_City }}</td> -->
+														<td>{{ cust.EvolveSupplier_State }}</td>
+														<!-- <td>{{ cust.EvolveSupplier_Country }}</td> -->
+														<!-- <td>{{ cust.EvolveSupplier_Zip }}</td> -->
+														<!-- <td>{{ cust.EvolveSupplier_ContactPerson }}</td> -->
+														<!-- <td>{{ cust.EvolveSupplier_Phone }}</td> -->
+														<!-- <td>{{ cust.EvolveSupplier_Email }}</td> -->
+														<!-- <td>{{ cust.EvolveSupplier_Gstin }}</td> -->
+														<td>{{ cust.EvolveSupplier_IsActive }}</td>
+														<td>{{ cust.EvolveSupplier_Currency }}</td>
+														<td>{{ cust.EvolveSupplier_ShipVia }}</td>
+														<td>{{ cust.EvolveSupplier_Remarks }}</td>
+													</tr>
+												</tbody>
+											</table>
+											<div class="paginate">
+												<Paginate
+													:page-count="pageCount"
+													:click-handler="paginateClick"
+													:prev-text="'<'"
+													:next-text="'>'"
+													:value="currentPage"
+													:container-class="'evolve_paginate'"
+												></Paginate>
+											</div>
 										</div>
-									</div>
-								</client-only>
-								<no-ssr>
-									<EvolvePDF :reqdata="pdfData"></EvolvePDF>
-								</no-ssr>
+									</client-only>
+									<client-only>
+										<EvolvePDF :reqdata="pdfData"></EvolvePDF>
+									</client-only>
+								</div>
 							</div>
 						</div>
+						<table id="sampleCustData" style="display : none !important">
+							<tr>
+								<th> {{ translate.supplier_name }}</th>
+								<th> {{ translate.supplier_code }}</th>
+								<th> {{ translate.supplier_address }}</th>
+								<th> {{ translate.supplier_city }}</th>
+								<th> {{ translate.supplier_state }}</th>
+								<th> {{ translate.supplier_country }}</th>
+								<th> {{ translate.email }}</th>
+								<th> {{ translate.supplier_zip }}</th>
+								<th> {{ translate.supplier_contact_person }}</th>
+								<th> {{ translate.supplier_contact_number }}</th>
+								<th> {{ translate.gstin }}</th>
+							</tr>
+							<tr>
+								<td> {{ translate.aliter_solutions }}</td>
+								<td>{{ translate.alimum }}</td>
+								<td> {{ translate.malad_west }}</td>
+								<td>{{ translate.mumbai }}</td>
+								<td>{{ translate.maharastra }}</td>
+								<td>{{ translate.india }}</td>
+								<td>supplier@gmail.com</td>
+								<td>400064</td>
+								<td> {{ translate.vijay_sabarwal }}</td>
+								<td>8879389324</td>
+								<td>Gst212211</td>
+							</tr>
+						</table>
 					</div>
-					<table id="sampleCustData" style="display : none !important">
-						<tr>
-							<th> {{ translate.supplier_name }}</th>
-							<th> {{ translate.supplier_code }}</th>
-							<th> {{ translate.supplier_address }}</th>
-							<th> {{ translate.supplier_city }}</th>
-							<th> {{ translate.supplier_state }}</th>
-							<th> {{ translate.supplier_country }}</th>
-							<th> {{ translate.email }}</th>
-							<th> {{ translate.supplier_zip }}</th>
-							<th> {{ translate.supplier_contact_person }}</th>
-							<th> {{ translate.supplier_contact_number }}</th>
-							<th> {{ translate.gstin }}</th>
-						</tr>
-						<tr>
-							<td> {{ translate.aliter_solutions }}</td>
-							<td>{{ translate.alimum }}</td>
-							<td> {{ translate.malad_west }}</td>
-							<td>{{ translate.mumbai }}</td>
-							<td>{{ translate.maharastra }}</td>
-							<td>{{ translate.india }}</td>
-							<td>supplier@gmail.com</td>
-							<td>400064</td>
-							<td> {{ translate.vijay_sabarwal }}</td>
-							<td>8879389324</td>
-							<td>Gst212211</td>
-						</tr>
-					</table>
 				</div>
 			</div>
-		</div>
+		</client-only>
 	</div>
 </template>
 <style>
@@ -220,6 +235,7 @@ export default {
 				email	:"Email",
 				gstin	:"GST IN",
 			},
+			pageURL:'/evolve/supplierMaster/list',
 			dateRange : '',
 			userId : this.$store.state.auth.user.EvolveUser_ID,
 			token : this.$auth.getToken('local'),

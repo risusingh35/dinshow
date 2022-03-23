@@ -117,26 +117,31 @@ module.exports = {
         return new Error(" EERR####: Error While Get Supplier List "+error.message);
       }
     },
-    // getShipList: async function (data) {
-    // try {
-    //    let query = " SELECT TOP(20) EvolveShipTo_Code + ' - '+EvolveShipTo_Name  as title, EvolveAddress_ID as id FROM    EvolveShipTo WHERE    (EvolveShipTo_Code  LIKE '%" + data.search + "%'  OR EvolveShipTo_Name  LIKE '%" + data.search + "%' )"
-    //   return await Evolve.SqlPool.request()
-    //   // .input('EvolveUnit_ID', Evolve.Sql.Int, data.EvolveUnit_ID)
-    //   .query(query);
-    // } catch (error) {
-
-    //   Evolve.Log.error(" EERR####: Error While Get Supplier List "+error.message);
-    //   return new Error(" EERR####: Error While Get Supplier List "+error.message);
-    // }
-    // },
     getItemDetails: async function (data) {
+      // console.log("getItemDetails>>>>>>>>>>>>>>>>>>>>>>data",data);
       try {
-          
-        return await Evolve.SqlPool.request()
-        .input('EvolveItem_ID', Evolve.Sql.Int, data.EvolveItem_ID)
-        .input('EvolveUnit_ID', Evolve.Sql.Int, data.EvolveUnit_ID)
 
-        .query("SELECT ei.EvolveTaxClass_ID,   ei.EvolveItem_Code  , ei.EvolveItem_Desc , euom.EvolveUom_Uom   FROM   EvolveItem  ei , EvolveUom euom WHERE  ei.EvolveItem_ID = @EvolveItem_ID AND ei.EvolveUom_ID = euom.EvolveUom_ID ");
+      if (data.EvolvePRDetails_IsMemoItem==true) {
+        return await Evolve.SqlPool.request()
+        .input('EvolveItem_Code', Evolve.Sql.NVarChar, data.EvolveItem_Code)        
+        .input('EvolveUnit_ID', Evolve.Sql.Int, data.EvolveUnit_ID)
+        // .query("SELECT ei.EvolveTaxClass_ID,   ei.EvolveItem_Code  , ei.EvolveItem_Desc , euom.EvolveUom_Uom   FROM   EvolveItem  ei , EvolveUom euom WHERE  ei.EvolveItem_ID = @EvolveItem_ID AND ei.EvolveUom_ID = euom.EvolveUom_ID ");
+            .query("SELECT *   FROM   EvolvePRDetails where  EvolveItem_Code = @EvolveItem_Code");
+    
+      }
+else{
+  return await Evolve.SqlPool.request()
+  // .input('EvolveItem_Code', Evolve.Sql.NVarChar, selectData)
+  .input('EvolveItem_ID', Evolve.Sql.Int, data.EvolveItem_ID)
+  .input('EvolveUnit_ID', Evolve.Sql.Int, data.EvolveUnit_ID)
+
+  .query("SELECT ei.EvolveTaxClass_ID,   ei.EvolveItem_Code  , ei.EvolveItem_Desc , euom.EvolveUom_Uom   FROM   EvolveItem  ei , EvolveUom euom WHERE  ei.EvolveItem_ID = @EvolveItem_ID AND ei.EvolveUom_ID = euom.EvolveUom_ID ");
+      // .query("SELECT *   FROM   EvolvePRDetails where EvolveItem_ID = @EvolveItem_ID ");
+}
+      
+  
+    
+     
       } catch (error) {
   
         Evolve.Log.error(" EERR####: Error While Get Desc "+error.message);
@@ -298,26 +303,25 @@ module.exports = {
 
 
     savePRLineDetails : async function (data) {
-      
-      try {
+      // console.log("savePRLineDetails>>>>>>>>>>>>>>>>>11",data);
+      try { 
         let EvolvePRDetails_NeedDate = data.EvolvePRDetails_NeedDate ; 
         let EvolvePRDetails_DueDate = data.EvolvePRDetails_DueDate ; 
-       EvolvePRDetails_NeedDate = EvolvePRDetails_NeedDate == '' || EvolvePRDetails_NeedDate == null || EvolvePRDetails_NeedDate == 'null'  ? null : EvolvePRDetails_NeedDate.split("-").reverse().join("-").replace("-", "-");
 
+       EvolvePRDetails_NeedDate = EvolvePRDetails_NeedDate == '' || EvolvePRDetails_NeedDate == null  ? null : EvolvePRDetails_NeedDate.split("-").reverse().join("-").replace("-", "-");
 
-       EvolvePRDetails_DueDate = EvolvePRDetails_DueDate == '' || EvolvePRDetails_DueDate == null || EvolvePRDetails_DueDate == 'null'  ? null : EvolvePRDetails_DueDate.split("-").reverse().join("-").replace("-", "-");
+       EvolvePRDetails_DueDate = EvolvePRDetails_DueDate == '' || EvolvePRDetails_DueDate == null  ? null : EvolvePRDetails_DueDate.split("-").reverse().join("-").replace("-", "-");
 
-
-
-        let datetime = await Evolve.App.Controllers.Unit.unitControllers.getDateTime();
-        
+        let datetime = await Evolve.App.Controllers.Unit.unitControllers.getDateTime();   
+        // console.log("the data>>>>>>>>>>>>>>",EvolvePRDetails_NeedDate);     
         return await Evolve.SqlPool.request()
           
         .input('EvolvePR_ID', Evolve.Sql.Int, data.EvolvePR_ID)
         .input('EvolvePRDetails_LineNo', Evolve.Sql.Int, parseInt(data.EvolvePRDetails_LineNo))
         .input('EvolveItem_ID', Evolve.Sql.Int, parseInt(data.EvolveItem_ID))
-        .input('EvolveSupplier_ID', Evolve.Sql.Int, parseInt(data.EvolveSupplier_ID))
-
+        .input('EvolveItem_Code', Evolve.Sql.NVarChar, data.EvolveItem_Code)
+        .input('EvolveItem_Desc', Evolve.Sql.NVarChar, data.EvolveItem_Desc)
+        .input('EvolveUom_Uom', Evolve.Sql.NVarChar, data.EvolveUom_Uom)
         .input('EvolvePRDetails_Qty', Evolve.Sql.NVarChar, data.EvolvePRDetails_Qty)
         .input('EvolvePRDetails_NeedDate', Evolve.Sql.NVarChar, EvolvePRDetails_NeedDate)
         .input('EvolvePRDetails_DueDate', Evolve.Sql.NVarChar, EvolvePRDetails_DueDate)
@@ -328,8 +332,9 @@ module.exports = {
         .input('EvolvePRDetails_CreatedUser', Evolve.Sql.Int, data.EvolveUser_ID)
         .input('EvolvePRDetails_UpdatedAt', Evolve.Sql.NVarChar, datetime)
         .input('EvolvePRDetails_UpdatedUser', Evolve.Sql.Int, data.EvolveUser_ID)
+        .input('EvolvePRDetails_IsMemoItem', Evolve.Sql.Bit, data.EvolvePRDetails_IsMemoItem)
 
-        .query(' INSERT INTO EvolvePRDetails (EvolvePRDetails_NeedDate , EvolvePRDetails_DueDate , EvolvePR_ID ,EvolvePRDetails_LineNo, EvolveItem_ID,EvolveSupplier_ID , EvolvePRDetails_Qty, EvolvePRDetails_ItemUnitPrice, EvolvePRDetails_ItemTotalPrice,EvolvePRDetails_Rmrks, EvolvePRDetails_CreatedAt, EvolvePRDetails_CreatedUser, EvolvePRDetails_UpdatedAt, EvolvePRDetails_UpdatedUser) VALUES (@EvolvePRDetails_NeedDate , @EvolvePRDetails_DueDate  ,@EvolvePR_ID ,@EvolvePRDetails_LineNo, @EvolveItem_ID,@EvolveSupplier_ID, @EvolvePRDetails_Qty, @EvolvePRDetails_ItemUnitPrice, @EvolvePRDetails_ItemTotalPrice, @EvolvePRDetails_Rmrks , @EvolvePRDetails_CreatedAt, @EvolvePRDetails_CreatedUser, @EvolvePRDetails_UpdatedAt, @EvolvePRDetails_UpdatedUser) ');
+        .query(' INSERT INTO EvolvePRDetails (EvolvePRDetails_IsMemoItem, EvolvePRDetails_NeedDate , EvolvePRDetails_DueDate , EvolvePR_ID ,EvolvePRDetails_LineNo, EvolveItem_ID, EvolveItem_Code, EvolveItem_Desc, EvolveUom_Uom, EvolvePRDetails_Qty, EvolvePRDetails_ItemUnitPrice, EvolvePRDetails_ItemTotalPrice,EvolvePRDetails_Rmrks, EvolvePRDetails_CreatedAt, EvolvePRDetails_CreatedUser, EvolvePRDetails_UpdatedAt, EvolvePRDetails_UpdatedUser) VALUES (@EvolvePRDetails_IsMemoItem, @EvolvePRDetails_NeedDate , @EvolvePRDetails_DueDate  ,@EvolvePR_ID ,@EvolvePRDetails_LineNo, @EvolveItem_ID, @EvolveItem_Code, @EvolveItem_Desc, @EvolveUom_Uom,  @EvolvePRDetails_Qty, @EvolvePRDetails_ItemUnitPrice, @EvolvePRDetails_ItemTotalPrice, @EvolvePRDetails_Rmrks , @EvolvePRDetails_CreatedAt, @EvolvePRDetails_CreatedUser, @EvolvePRDetails_UpdatedAt, @EvolvePRDetails_UpdatedUser) ');
       } catch (error) {
   
         Evolve.Log.error("line errororoor: Error While Save PR Line Details "+error.message);
@@ -351,7 +356,10 @@ module.exports = {
       try {
         return await Evolve.SqlPool.request()
         .input('EvolvePR_ID', Evolve.Sql.Int, EvolvePR_ID)
-        .query("  SELECT  esup.EvolveSupplier_ID ,  (esup.EvolveSupplier_Code +' - '+ esup.EvolveSupplier_Name ) as EvolveSupplier_Code ,  epr.EvolvePRDetails_ItemTotalPrice ,  epr.EvolvePRDetails_ItemUnitPrice, epr.EvolvePRDetails_ID , epr.EvolvePR_ID ,epr.EvolvePRDetails_LineNo  , epr.EvolveItem_ID ,epr.EvolvePRDetails_Qty,epr.EvolvePRDetails_Rmrks , convert(varchar, epr.EvolvePRDetails_NeedDate, 105)  as EvolvePRDetails_NeedDate ,   convert(varchar, epr.EvolvePRDetails_DueDate, 105)  as EvolvePRDetails_DueDate, ei.EvolveItem_Code ,  ei.EvolveItem_Desc FROM   EvolveItem ei  ,  EvolvePRDetails  epr LEFT JOIN EvolveSupplier esup ON epr.EvolveSupplier_ID = esup.EvolveSupplier_ID  WHERE epr.EvolveItem_ID = ei.EvolveItem_ID AND  epr.EvolvePR_ID=@EvolvePR_ID");
+        // .query("  SELECT  esup.EvolveSupplier_ID ,  (esup.EvolveSupplier_Code +' - '+ esup.EvolveSupplier_Name ) as EvolveSupplier_Code ,  epr.EvolvePRDetails_ItemTotalPrice ,  epr.EvolvePRDetails_ItemUnitPrice, epr.EvolvePRDetails_ID , epr.EvolvePR_ID ,epr.EvolvePRDetails_LineNo  , epr.EvolveItem_ID ,epr.EvolvePRDetails_Qty,epr.EvolvePRDetails_Rmrks , convert(varchar, epr.EvolvePRDetails_NeedDate, 105)  as EvolvePRDetails_NeedDate ,   convert(varchar, epr.EvolvePRDetails_DueDate, 105)  as EvolvePRDetails_DueDate, ei.EvolveItem_Code ,  ei.EvolveItem_Desc FROM   EvolveItem ei  ,  EvolvePRDetails  epr LEFT JOIN EvolveSupplier esup ON epr.EvolveSupplier_ID = esup.EvolveSupplier_ID  WHERE epr.EvolveItem_ID = ei.EvolveItem_ID AND  epr.EvolvePR_ID=@EvolvePR_ID");
+        // .query("SELECT * FROM EvolvePRDetails WHERE EvolveItem_Code=@EvolveItem_Code AND EvolveItem_Desc=@EvolveItem_Desc AND EvolveUom_Uom=@EvolveUom_Uom")
+        .query("SELECT * FROM EvolvePRDetails   WHERE EvolvePR_ID=@EvolvePR_ID")
+
       } catch (error) {
         Evolve.Log.error(" EERR####: Error While Get Single Pr Details  "+error.message);
         return new Error(" EERR####: Error While Get Single Pr Details  "+error.message);
@@ -517,4 +525,5 @@ module.exports = {
           return new Error(" EERR####: Error While Get Ship to details "+error.message);
       }
   },
+
 }
