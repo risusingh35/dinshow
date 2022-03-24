@@ -69,6 +69,20 @@ export default {
 		return {
 			EvolveMenu_Id: this.$route.query.EvolveMenu_Id,
 			pageURL: "/rk/dynamicTable/list",
+			listData:[],
+			/** Start : EvolveDataTable */
+			search : '', // For making dynamic search
+			currentPage: 1,
+			pageCount: 0,
+			displayRecord: 10,
+			noOfRecord: 0,
+			startFrom: 0,
+			displayRow: [10, 25, 50, 100, 200],
+			pdfData: {},
+			csvExportColums: [0, 1, 2, 3, 4, 5],
+			pdfExportColums: [0, 1, 2, 3, 4, 5],
+			/** End : EvolveDataTable */
+			custCsv : '',
 			translate: {
 				create: "Create",
 				action: "Action",
@@ -87,10 +101,33 @@ export default {
 	},
 
 	methods: {
-        		refreshPage: async function () {
+		refreshPage: async function () {
 			this.removeModal();
 			this.isCalling = true;
-			this.getList();
+			await this.getList();
+		},
+		getList: async function (){
+			let getList =  await this.$axios.$post('/api/v1/evolve/supplierMaster/getSupplierList', {
+				displayRecord: this.displayRecord,
+				startFrom: this.startFrom,
+				search : this.search,
+			}).catch(e => { 
+				this.notification('danger', 3000, 'Problem with connecting to server!');
+			});
+			if (getList) {
+				if (getList.statusCode == 200) {
+					this.listData = getList.result.records;
+					if (getList.result.noOfRecord > 0) {
+						this.pageCount = Math.ceil(
+							getList.result.noOfRecord / this.displayRecord
+						);
+					}else{
+						this.pageCount = 0
+					}
+				} else {
+					this.notification("danger", 3000, getList.message);
+				}
+			}
 		},
 		onCreateOrEdit: async function (PR_ID) {
 			//this.$root.$emit("onCloseTabCalled", '/evolve/menus/options');
@@ -109,6 +146,19 @@ export default {
 					url: "/rk/dynamicTable/option",
 				});
 			}
+		},
+		async onDisplayRecordChange (displayRecord) {
+			this.startFrom = parseInt(
+				this.currentPage * this.displayRecord - this.displayRecord
+			);
+			this.getCustomerList();
+		},
+		async paginateClick (pageNum) {
+			this.currentPage = pageNum;
+			this.startFrom = parseInt(
+				pageNum * this.displayRecord - this.displayRecord
+			);
+			this.getCustomerList();
 		},
 	},
 };

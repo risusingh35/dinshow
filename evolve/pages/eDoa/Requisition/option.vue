@@ -1451,7 +1451,8 @@ export default {
 		},
 		async onDeleteLine (index) {
 			this.lineDetailList.splice(index, 1);
-			for (let i = 0; i < this.lineDetailList.length; i++) {
+			for (let i = index
+				; i < this.lineDetailList.length; i++) {
 				this.lineDetailList[i].EvolvePRDetails_LineNo -= 1;
 			}
 		},
