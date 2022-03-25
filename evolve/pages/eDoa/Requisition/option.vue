@@ -610,7 +610,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="uk-width-1-4@m">
+									<!-- <div class="uk-width-1-4@m">
 										<div class="uk-grid" data-uk-grid>
 											<div class="uk-width-1-2@m">
 												<label for="table lable" class="evolve-input-lable">{{
@@ -629,7 +629,7 @@
 												></ScInput>
 											</div>
 										</div>
-									</div>
+									</div> -->
 
 									<div class="uk-width-1-4@m">
 										<div class="uk-grid" data-uk-grid>
@@ -928,6 +928,8 @@ export default {
 				search_here: "Search Here",
 				back: "Back",
 			},
+	
+			
 			EvolveMenu_Id: this.$route.query.EvolveMenu_Id,
 			pageURL: "/eDoa/Requisition/option",
 			/* Start : EvolveDataTable */
@@ -997,10 +999,10 @@ export default {
         this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getItemList",
 			getCustList:
         this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getSupList",
-			// 	getShipList:
-			// this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getShipList",
+			getShipList:
+			this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getShipList",
 		
- 	getShipList:this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getAdressList",
+ 	// getShipList:this.$axios.defaults.baseURL + "api/v1/eDoa/Requisition/getAdressList",
 			lineDetailList: [],
 			prId: "",
 			isLableDisabled: false,
@@ -1074,9 +1076,9 @@ export default {
 		subAcc: {
 			required,
 		},
-		costCenter: {
-			required,
-		},
+		// costCenter: {
+		// 	required,
+		// },
 		headerNeedDate: {
 			required,
 		},
@@ -1685,10 +1687,10 @@ export default {
 		},
 
 		async getShipToDetails () {
-			if (this.shipToAddId != "") {
+			if (this.shipToAddId != "" && this.shipToAddId !=undefined && this.shipToAddId !=null) {
 				let details = await this.$axios
 					.$post("/api/v1/eDoa/Requisition/getShipToDetails", {
-						EvolveAddress_ID: this.shipToAddId,
+						EvolveShipToUnit_ID: this.shipToAddId,
 						// EvolveAddress_ID
 						// EvolveShipTo_ID
 					})
@@ -1700,29 +1702,30 @@ export default {
 						);
 					});
 				if (details.statusCode == 200) {
-					console.log("details>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", details);
+					
 					this.shipToAdress =
-            (details.result.EvolveAddress_Street1 == null
+            (details.result.EvolveUnit_Addr == null
             	? ""
-            	: details.result.EvolveAddress_Street1) +
+            	: details.result.EvolveUnit_Addr) +
             " " +
-            (details.result.EvolveAddress_Street2 == null
+			  (details.result.EvolveUnit_Addr1 == null
             	? ""
-            	: details.result.EvolveAddress_Street2) +
+            	: details.result.EvolveUnit_Addr1) +
             " " +
-            (details.result.EvolveAddress_Street3 == null
+            (details.result.EvolveUnit_Addr2 == null
             	? ""
-            	: details.result.EvolveAddress_Street3) +
+            	: details.result.EvolveUnit_Addr2) +
             " " +
-            (details.result.EvolveAddress_City == null
+          
+            (details.result.EvolveUnit_City == null
             	? ""
-            	: details.result.EvolveAddress_City);
+            	: details.result.EvolveUnit_City);
 					this.shipToDetails = "Ship TO : " + this.shipToAdress;
 					this.selectedShipTo =
-            details.result.EvolveAddress_Code +
+            details.result.EvolveUnit_Code +
             " " +
             details.result.EvolveAddress_SearchName;
-					this.selectedShipTo1 = details.result.EvolveAddress_Code;
+					this.selectedShipTo1 = details.result.EvolveUnit_Code;
 				} else {
 					this.notification("danger", 3000, details.message);
 				}

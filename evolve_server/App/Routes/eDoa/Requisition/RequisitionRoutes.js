@@ -47,11 +47,11 @@ try {
     
     Evolve.Router.post('/api/v1/eDoa/Requisition/getSupList', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getSupList);
 
-    // Evolve.Router.post('/api/v1/eDoa/Requisition/getShipList', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getShipList);
+    Evolve.Router.post('/api/v1/eDoa/Requisition/getShipList', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getShipList);
 
 
 
-    Evolve.Router.post('/api/v1/eDoa/Requisition/getItemDetails', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getItemDetails);
+    // Evolve.Router.post('/api/v1/eDoa/Requisition/getItemDetails', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getItemDetails);
 
 
     Evolve.Router.post('/api/v1/eDoa/Requisition/getTaxClassesList', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getTaxClassesList);

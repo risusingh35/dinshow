@@ -27,10 +27,10 @@ module.exports = {
             return new Error(" EERR####: Error While Get Customer Details "+error.message);
         }
     },
-    getAdressList: async function (data) {
+    getShipList: async function (data) {
         try {      
             // console.log("dta--------------------------------------------------------a",data);
-                      let query = " SELECT TOP(20) EvolveAddress_Code + ' - '+EvolveAddress_SearchName  as title, EvolveAddress_ID as id FROM    EvolveAddress WHERE    (EvolveAddress_Code  LIKE '%" + data.term + "%'  OR EvolveAddress_SearchName  LIKE '%" + data.term + "%' )"
+                      let query = " SELECT TOP(20) EvolveUnit_Code + ' - '+EvolveUnit_Name  as title, EvolveUnit_ID as id FROM    EvolveUnit WHERE    (EvolveUnit_Code  LIKE '%" + data + "%'  OR EvolveUnit_Name  LIKE '%" + data + "%' )"
                       // console.log(query);
             return await Evolve.SqlPool.request()
             // .input('EvolveAddress_Code', Evolve.Sql.Int, data.EvolveAddress_Code)
@@ -249,7 +249,7 @@ else{
         .input('EvolvePR_BuyerID', Evolve.Sql.Int, data.EvolvePR_BuyerID)
         .input('EvolvePR_EndUserID', Evolve.Sql.Int, data.EvolvePR_EndUserID)
         .input('EvolvePR_SubAccount', Evolve.Sql.NVarChar, data.EvolvePR_SubAccount)
-        .input('EvolvePR_CostCenter', Evolve.Sql.NVarChar, data.EvolvePR_CostCenter)
+        // .input('EvolvePR_CostCenter', Evolve.Sql.NVarChar, data.EvolvePR_CostCenter)
         .input('EvolvePR_CreatedAt', Evolve.Sql.NVarChar, datetime)
         .input('EvolvePR_CreatedUser', Evolve.Sql.Int, data.EvolveUser_ID)
         .input('EvolvePR_UpdatedAt', Evolve.Sql.NVarChar, datetime)
@@ -259,7 +259,7 @@ else{
         .input('EvolvePR_TotalCost', Evolve.Sql.NVarChar, data.EvolvePR_TotalCost)
         .input('EvolveUnit_ID', Evolve.Sql.Int, data.EvolveUnit_ID)
 
-        .query('INSERT INTO EvolvePR (EvolvePR_NO, EvolveCategory_ID, EvolveApprovalMatrix_ID, EvolveAddress_ID, EvolvePR_CurrencyID, EvolvePR_Date, EvolvePR_NeedDate, EvolvePR_DueDate, EvolvePR_Rmrks, EvolveProject_ID,EvolvePR_BuyerID, EvolvePR_EndUserID, EvolvePR_SubAccount, EvolvePR_CostCenter, EvolvePR_CreatedAt, EvolvePR_CreatedUser, EvolvePR_UpdatedAt, EvolvePR_UpdatedUser,EvolvePR_Status,EvolveSupplier_ID,EvolvePR_TotalCost,EvolveUnit_ID) VALUES (@EvolvePR_NO, @EvolveCategory_ID, @EvolveApprovalMatrix_ID, @EvolveAddress_ID, @EvolvePR_CurrencyID, @EvolvePR_Date, @EvolvePR_NeedDate, @EvolvePR_DueDate, @EvolvePR_Rmrks, @EvolveProject_ID, @EvolvePR_BuyerID, @EvolvePR_EndUserID, @EvolvePR_SubAccount, @EvolvePR_CostCenter, @EvolvePR_CreatedAt, @EvolvePR_CreatedUser, @EvolvePR_UpdatedAt, @EvolvePR_UpdatedUser,@EvolvePR_Status,@EvolveSupplier_ID,@EvolvePR_TotalCost,@EvolveUnit_ID) ;select @@IDENTITY AS \'inserted_id\'');
+        .query('INSERT INTO EvolvePR (EvolvePR_NO, EvolveCategory_ID, EvolveApprovalMatrix_ID, EvolveAddress_ID, EvolvePR_CurrencyID, EvolvePR_Date, EvolvePR_NeedDate, EvolvePR_DueDate, EvolvePR_Rmrks, EvolveProject_ID,EvolvePR_BuyerID, EvolvePR_EndUserID, EvolvePR_SubAccount, EvolvePR_CreatedAt, EvolvePR_CreatedUser, EvolvePR_UpdatedAt, EvolvePR_UpdatedUser,EvolvePR_Status,EvolveSupplier_ID,EvolvePR_TotalCost,EvolveUnit_ID) VALUES (@EvolvePR_NO, @EvolveCategory_ID, @EvolveApprovalMatrix_ID, @EvolveAddress_ID, @EvolvePR_CurrencyID, @EvolvePR_Date, @EvolvePR_NeedDate, @EvolvePR_DueDate, @EvolvePR_Rmrks, @EvolveProject_ID, @EvolvePR_BuyerID, @EvolvePR_EndUserID, @EvolvePR_SubAccount, @EvolvePR_CreatedAt, @EvolvePR_CreatedUser, @EvolvePR_UpdatedAt, @EvolvePR_UpdatedUser,@EvolvePR_Status,@EvolveSupplier_ID,@EvolvePR_TotalCost,@EvolveUnit_ID) ;select @@IDENTITY AS \'inserted_id\'');
       } catch (error) {
   
         Evolve.Log.error(" EERR####: Error While Save Purachase Requisition "+error.message);
@@ -413,7 +413,7 @@ else{
         .input('EvolvePR_BuyerID', Evolve.Sql.Int, data.EvolvePR_BuyerID)
         .input('EvolvePR_EndUserID', Evolve.Sql.Int, data.EvolvePR_EndUserID)
         .input('EvolvePR_SubAccount', Evolve.Sql.NVarChar, data.EvolvePR_SubAccount)
-        .input('EvolvePR_CostCenter', Evolve.Sql.NVarChar, data.EvolvePR_CostCenter)
+        // .input('EvolvePR_CostCenter', Evolve.Sql.NVarChar, data.EvolvePR_CostCenter)
         .input('EvolvePR_CreatedAt', Evolve.Sql.NVarChar, datetime)
         .input('EvolvePR_CreatedUser', Evolve.Sql.Int, data.EvolveUser_ID)
         .input('EvolvePR_UpdatedAt', Evolve.Sql.NVarChar, datetime)
@@ -423,7 +423,7 @@ else{
         .input('EvolvePR_TotalCost', Evolve.Sql.NVarChar, data.EvolvePR_TotalCost)
         .input('EvolveUnit_ID', Evolve.Sql.Int, data.EvolveUnit_ID)
 
-        .query("UPDATE EvolvePR SET EvolvePR_NO=@EvolvePR_NO ,EvolveCategory_ID=@EvolveCategory_ID , EvolveApprovalMatrix_ID=@EvolveApprovalMatrix_ID , EvolveAddress_ID=@EvolveAddress_ID ,  EvolvePR_CurrencyID=@EvolvePR_CurrencyID , EvolvePR_Date=@EvolvePR_Date , EvolvePR_NeedDate=@EvolvePR_NeedDate, EvolvePR_DueDate=@EvolvePR_DueDate, EvolvePR_Rmrks=@EvolvePR_Rmrks , EvolveProject_ID=@EvolveProject_ID ,  EvolvePR_BuyerID=@EvolvePR_BuyerID , EvolvePR_EndUserID=@EvolvePR_EndUserID, EvolvePR_SubAccount=@EvolvePR_SubAccount, EvolvePR_CostCenter=@EvolvePR_CostCenter, EvolvePR_CreatedAt=@EvolvePR_CreatedAt ,EvolvePR_CreatedUser=@EvolvePR_CreatedUser , EvolvePR_UpdatedAt=@EvolvePR_UpdatedAt ,EvolvePR_UpdatedUser=@EvolvePR_UpdatedUser ,EvolvePR_Status=@EvolvePR_Status ,EvolveSupplier_ID=@EvolveSupplier_ID , EvolvePR_TotalCost=@EvolvePR_TotalCost ,  EvolveUnit_ID=@EvolveUnit_ID WHERE EvolvePR_ID=@EvolvePR_ID");
+        .query("UPDATE EvolvePR SET EvolvePR_NO=@EvolvePR_NO ,EvolveCategory_ID=@EvolveCategory_ID , EvolveApprovalMatrix_ID=@EvolveApprovalMatrix_ID , EvolveAddress_ID=@EvolveAddress_ID ,  EvolvePR_CurrencyID=@EvolvePR_CurrencyID , EvolvePR_Date=@EvolvePR_Date , EvolvePR_NeedDate=@EvolvePR_NeedDate, EvolvePR_DueDate=@EvolvePR_DueDate, EvolvePR_Rmrks=@EvolvePR_Rmrks , EvolveProject_ID=@EvolveProject_ID ,  EvolvePR_BuyerID=@EvolvePR_BuyerID , EvolvePR_EndUserID=@EvolvePR_EndUserID, EvolvePR_SubAccount=@EvolvePR_SubAccount, EvolvePR_CreatedAt=@EvolvePR_CreatedAt ,EvolvePR_CreatedUser=@EvolvePR_CreatedUser , EvolvePR_UpdatedAt=@EvolvePR_UpdatedAt ,EvolvePR_UpdatedUser=@EvolvePR_UpdatedUser ,EvolvePR_Status=@EvolvePR_Status ,EvolveSupplier_ID=@EvolveSupplier_ID , EvolvePR_TotalCost=@EvolvePR_TotalCost ,  EvolveUnit_ID=@EvolveUnit_ID WHERE EvolvePR_ID=@EvolvePR_ID");
       } catch (error) {
   
         Evolve.Log.error(" EERR####: Error While Update Purachase Requisition "+error.message);
@@ -517,13 +517,14 @@ else{
     getShipToDetails: async function (data) {
       try {      
           return await Evolve.SqlPool.request()
-          .input('EvolveAddress_ID', Evolve.Sql.Int, data.EvolveAddress_ID)
-          .query("SELECT  * FROM  EvolveAddress WHERE  EvolveAddress_ID=@EvolveAddress_ID");
+          .input('EvolveUnit_ID', Evolve.Sql.Int, data.EvolveShipToUnit_ID)
+          .query("SELECT  * FROM  EvolveUnit WHERE  EvolveUnit_ID=@EvolveUnit_ID");
       } catch (error) {
 
           Evolve.Log.error(" EERR####: Error While Get Ship to details "+error.message);
           return new Error(" EERR####: Error While Get Ship to details "+error.message);
       }
   },
+  
 
 }

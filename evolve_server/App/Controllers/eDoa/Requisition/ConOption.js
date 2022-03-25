@@ -158,11 +158,10 @@ module.exports = {
     },
 
     getShipList: async function (req, res) {
+        console.log("req.body serch>>>>>>>>>>>>>>>>>",req.body);
         try {
-            let data = {
-                search: req.body.term,
-            }
-            let result = await Evolve.App.Services.eDoa.Requisition.SrvOption.getShipList(data);
+            
+            let result = await Evolve.App.Services.eDoa.Requisition.SrvOption.getShipList(req.body.term);
             if (result instanceof Error) {
                 Evolve.Log.error("EERR#### : Error while get supplier  list")
                 let obj = { statusCode: 400, status: "fail", message: "EERR####: Error while get supplier  list", result: null };
