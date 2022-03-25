@@ -2,7 +2,8 @@
 const Evolve = require('../../../../Boot/Evolve');
 try {
 
-    Evolve.Router.get("/api/v1/Snop/Branch/getbusinessLineList", Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.Snop.Branch.ConBranchList.getbusinessLineList);
+    // D:\RISU SINGH\aliter\dinshow\evolve_server\App\Controllers\rk\DynamicTable\conList.js
+    Evolve.Router.get("/api/v1/rk/DynamicTable/getList", Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.rk.DynamicTable.conList.getList);
 
     /** End  : budgeting  */
 

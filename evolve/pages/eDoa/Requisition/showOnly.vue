@@ -940,7 +940,7 @@ export default {
 				back: "Back",
 			},
 			EvolveMenu_Id: this.$route.query.EvolveMenu_Id,
-			pageURL: "/eDoa/Requisition/option",
+			pageURL: "/eDoa/Requisition/showOnly",
 			/* Start : EvolveDataTable */
 			search: "", // For making dynamic search
 			currentPage: 1,

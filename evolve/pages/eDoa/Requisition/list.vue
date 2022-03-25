@@ -15,7 +15,6 @@
 					class="sc-actions-icon mdi mdi-window-minimize"
 				></a>
 			</div>
-
 			<div v-if="EvolveMenu_Id" class="evolve-page-header-icons">
 				<a
 					href="javascript:void(0)"
@@ -524,7 +523,7 @@ export default {
 	data () {
 		return {
 			EvolveMenu_Id: this.$route.query.EvolveMenu_Id,
-			pageURL: "	/evolve/eDoa/Requisition/list",
+			pageURL: "/eDoa/Requisition/list",
 			translate: {
 				create: "Create",
 				action: "Action",
