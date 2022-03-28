@@ -92,6 +92,7 @@
 										<th>{{ translate.action }}</th>
 									</tr>
 								</thead>
+								<!-- <p>{{ listData }}</p> -->
 								<tbody>
 									<tr v-for="(row, index) in listData" :key="index">
 										<td>{{ row.EvolveDynamicTable_ID }}</td>
