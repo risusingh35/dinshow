@@ -51,7 +51,7 @@ try {
 
 
 
-    // Evolve.Router.post('/api/v1/eDoa/Requisition/getItemDetails', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getItemDetails);
+    Evolve.Router.post('/api/v1/eDoa/Requisition/getItemDetails', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getItemDetails);
 
 
     Evolve.Router.post('/api/v1/eDoa/Requisition/getTaxClassesList', Evolve.App.Middlewares.EvolveCommonApiValidator.apiAuthorization, Evolve.App.Controllers.eDoa.Requisition.ConOption.getTaxClassesList);

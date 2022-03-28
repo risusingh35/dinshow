@@ -598,7 +598,7 @@
 												}} : </label>
 											</div>
 											<div class="uk-width-1-2@m">
-												<ScInput
+												<!-- <ScInput
 													v-model="$v.subAcc.$model"
 													:disabled="isLableDisabled"
 													name="subAcc"
@@ -606,6 +606,13 @@
 													placeholder="SUB-ACCOUNT"
 													:error-class="$v.subAcc.$error"
 													:validator="$v.subAcc"
+												></ScInput> -->
+												<ScInput
+													v-model="subAcc"
+													:disabled="true"
+													name="subAcc"
+													mode="outline"
+													placeholder="SUB-ACCOUNT"
 												></ScInput>
 											</div>
 										</div>
@@ -1073,9 +1080,9 @@ export default {
 		endUserId: {
 			required,
 		},
-		subAcc: {
-			required,
-		},
+		// subAcc: {
+		// 	required,
+		// },
 		// costCenter: {
 		// 	required,
 		// },
@@ -1303,7 +1310,9 @@ export default {
 		},
 
 		async getItemDetails () {
-			if (this.itemId != null && this.itemId != "") {
+			
+			if (this.itemId != null && this.itemId !='') {
+
 				let itemDetails = await this.$axios
 					.$post("/api/v1/eDoa/Requisition/getItemDetails", {
 						EvolveItem_ID: this.itemId,
@@ -1318,7 +1327,7 @@ export default {
 							"Problem with connecting to server!"
 						);
 					});
-
+				console.log("	async getItemDetails () {==================", itemDetails);
 				if (itemDetails.statusCode == 200) {
 					this.itemDesc = itemDetails.result.EvolveItem_Desc;
 					this.itemCode = itemDetails.result.EvolveItem_Code;
